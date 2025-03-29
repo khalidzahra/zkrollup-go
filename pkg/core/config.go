@@ -15,8 +15,12 @@ type Config struct {
 	BatchSize        uint64
 	ProofGeneration  bool
 	StateDBPath      string
-	VerificationKey  string
-	ProvingKey       string
+
+	// ZK-SNARK configuration
+	CircuitFile      string
+	ProvingKeyFile   string
+	VerifyingKeyFile string
+	MerkleTreeDepth  int
 }
 
 func DefaultConfig() *Config {
