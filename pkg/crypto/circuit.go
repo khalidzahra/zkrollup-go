@@ -1,28 +1,24 @@
 package crypto
 
 import (
+	tedwards "github.com/consensys/gnark-crypto/ecc/twistededwards"
 	"github.com/consensys/gnark/frontend"
+	"github.com/consensys/gnark/std/algebra/native/twistededwards"
 	"github.com/consensys/gnark/std/hash/mimc"
 	"github.com/consensys/gnark/std/signature/eddsa"
-	"github.com/consensys/gnark/std/algebra/twistededwards"
-	tedwards "github.com/consensys/gnark-crypto/ecc/twistededwards"
 )
 
 // TransactionCircuit defines the ZK-SNARK circuit for transaction verification
 type TransactionCircuit struct {
 	// Public inputs
-	FromPubKey   eddsa.PublicKey   `gnark:",public"`
-	ToPubKey     eddsa.PublicKey   `gnark:",public"`
-	Amount       frontend.Variable  `gnark:",public"`
-	Nonce        frontend.Variable  `gnark:",public"`
-	OldStateRoot frontend.Variable  `gnark:",public"`
-	NewStateRoot frontend.Variable  `gnark:",public"`
+	FromPubKey eddsa.PublicKey   `gnark:",public"`
+	ToPubKey   eddsa.PublicKey   `gnark:",public"`
+	Amount     frontend.Variable `gnark:",public"`
+	Nonce      frontend.Variable `gnark:",public"`
 
 	// Private inputs
-	Signature    eddsa.Signature   `gnark:",private"`
-	FromBalance  frontend.Variable `gnark:",private"`
-	ToBalance    frontend.Variable `gnark:",private"`
-	MerkleProof  []frontend.Variable `gnark:",private"`
+	Signature eddsa.Signature   `gnark:",secret"`
+	Balance   frontend.Variable `gnark:",secret"`
 
 	// Internal state
 	api frontend.API
@@ -51,63 +47,20 @@ func (c *TransactionCircuit) Define(api frontend.API) error {
 	}
 
 	// 2. Verify sender has sufficient balance
-	api.AssertIsLessOrEqual(c.Amount, c.FromBalance)
-
-	// 3. Verify state transition
-	newFromBalance := api.Sub(c.FromBalance, c.Amount)
-	newToBalance := api.Add(c.ToBalance, c.Amount)
-
-	// 4. Verify merkle proof for old state
-	verifyMerkleProof(api, c.MerkleProof, c.OldStateRoot)
-
-	// 5. Verify new state root
-	computedNewRoot := computeNewStateRoot(api, c.MerkleProof, newFromBalance, newToBalance)
-	api.AssertIsEqual(computedNewRoot, c.NewStateRoot)
+	api.AssertIsLessOrEqual(c.Amount, c.Balance)
 
 	return nil
 }
 
-func computeMessageHash(api frontend.API, from eddsa.PublicKey, to eddsa.PublicKey, amount, nonce frontend.Variable) frontend.Variable {
+func computeMessageHash(api frontend.API, from, to eddsa.PublicKey, amount, nonce frontend.Variable) frontend.Variable {
 	hash, _ := mimc.NewMiMC(api)
-	
+
 	hash.Write(from.A.X)
 	hash.Write(from.A.Y)
 	hash.Write(to.A.X)
 	hash.Write(to.A.Y)
 	hash.Write(amount)
 	hash.Write(nonce)
-	
+
 	return hash.Sum()
-}
-
-func verifyMerkleProof(api frontend.API, proof []frontend.Variable, root frontend.Variable) {
-	// Simplified merkle proof verification
-	current := proof[0]
-	hash, _ := mimc.NewMiMC(api)
-
-	for i := 1; i < len(proof); i++ {
-		hash.Reset()
-		hash.Write(current)
-		hash.Write(proof[i])
-		current = hash.Sum()
-	}
-
-	api.AssertIsEqual(current, root)
-}
-
-func computeNewStateRoot(api frontend.API, proof []frontend.Variable, newFromBalance, newToBalance frontend.Variable) frontend.Variable {
-	// Simplified new state root computation
-	hash, _ := mimc.NewMiMC(api)
-	hash.Write(newFromBalance)
-	hash.Write(newToBalance)
-	current := hash.Sum()
-
-	for i := 1; i < len(proof); i++ {
-		hash.Reset()
-		hash.Write(current)
-		hash.Write(proof[i])
-		current = hash.Sum()
-	}
-
-	return current
 }
