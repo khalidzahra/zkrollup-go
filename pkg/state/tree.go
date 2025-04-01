@@ -9,17 +9,17 @@ import (
 
 // MerkleTree represents a sparse Merkle tree for state management
 type MerkleTree struct {
-	depth     int
+	depth      int
 	zeroHashes [][32]byte
-	leaves    map[[32]byte][32]byte
+	leaves     map[[32]byte][32]byte
 }
 
 // NewMerkleTree creates a new sparse Merkle tree with the given depth
 func NewMerkleTree(depth int) *MerkleTree {
 	tree := &MerkleTree{
-		depth:     depth,
+		depth:      depth,
 		zeroHashes: make([][32]byte, depth+1),
-		leaves:    make(map[[32]byte][32]byte),
+		leaves:     make(map[[32]byte][32]byte),
 	}
 
 	// Compute zero hashes for empty branches
@@ -158,7 +158,7 @@ func hashPair(left, right *fr.Element) *fr.Element {
 	hash := sha256.New()
 	hash.Write(leftBytes[:])
 	hash.Write(rightBytes[:])
-	
+
 	result.SetBytes(hash.Sum(nil))
 	return result
 }
