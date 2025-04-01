@@ -12,9 +12,9 @@ type Config struct {
 	BootstrapPeers   []string
 
 	// Rollup configuration
-	BatchSize        uint64
-	ProofGeneration  bool
-	StateDBPath      string
+	BatchSize       uint64
+	ProofGeneration bool
+	StateDBPath     string
 
 	// ZK-SNARK configuration
 	CircuitFile      string

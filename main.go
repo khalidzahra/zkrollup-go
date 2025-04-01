@@ -14,7 +14,11 @@ func main() {
 	config := core.DefaultConfig()
 
 	// Initialize sequencer
-	seq := sequencer.NewSequencer(config)
+	seq, err := sequencer.NewSequencer(config)
+	if err != nil {
+		log.Fatalf("Failed to create sequencer: %v", err)
+	}
+
 	if err := seq.Start(); err != nil {
 		log.Fatalf("Failed to start sequencer: %v", err)
 	}

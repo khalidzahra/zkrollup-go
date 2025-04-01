@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"zkrollup/pkg/core"
+	"zkrollup/pkg/crypto"
 	"zkrollup/pkg/state"
 )
 
@@ -29,10 +30,20 @@ type Sequencer struct {
 
 	ctx    context.Context
 	cancel context.CancelFunc
+
+	// ZK proof generation
+	prover *crypto.Prover
 }
 
-func NewSequencer(config *core.Config) *Sequencer {
+func NewSequencer(config *core.Config) (*Sequencer, error) {
 	ctx, cancel := context.WithCancel(context.Background())
+
+	prover, err := crypto.NewProver()
+	if err != nil {
+		cancel()
+		return nil, fmt.Errorf("failed to create prover: %v", err)
+	}
+
 	return &Sequencer{
 		config:      config,
 		state:       state.NewState(),
@@ -41,7 +52,8 @@ func NewSequencer(config *core.Config) *Sequencer {
 		consensusCh: make(chan state.Batch),
 		ctx:         ctx,
 		cancel:      cancel,
-	}
+		prover:      prover,
+	}, nil
 }
 
 func (s *Sequencer) Start() error {
@@ -124,15 +136,44 @@ func (s *Sequencer) participateConsensus() {
 	}
 }
 
-func (s *Sequencer) processFinalizedBatch(batch state.Batch) {
+func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
 	s.batchMu.Lock()
 	defer s.batchMu.Unlock()
 
-	// Apply transactions
+	// Get initial state root
+	initialRoot := s.state.GetStateRoot()
+
+	// Apply transactions and generate proofs
 	for _, tx := range batch.Transactions {
 		from := s.state.GetAccount(tx.From)
 		to := s.state.GetAccount(tx.To)
 
+		// Create circuit assignment
+		assignment := &crypto.TransactionCircuit{
+			Amount:  tx.Amount.String(),
+			Balance: from.Balance.String(),
+		}
+
+		// Generate and verify proof
+		proof, err := s.prover.GenerateProof(assignment)
+		if err != nil {
+			return fmt.Errorf("failed to generate proof: %v", err)
+		}
+
+		// Verify proof
+		valid, err := s.prover.VerifyProof(proof, assignment)
+		if err != nil {
+			return fmt.Errorf("failed to verify proof: %v", err)
+		}
+
+		if !valid {
+			return fmt.Errorf("invalid transaction proof")
+		}
+
+		// Store proof
+		tx.Signature = proof
+
+		// Update state
 		from.Balance.Sub(from.Balance, tx.Amount)
 		from.Nonce++
 		to.Balance.Add(to.Balance, tx.Amount)
@@ -141,6 +182,16 @@ func (s *Sequencer) processFinalizedBatch(batch state.Batch) {
 		s.state.UpdateAccount(to)
 	}
 
+	// Get final state root and generate state transition proof
+	finalRoot := s.state.GetStateRoot()
+
+	// Store batch proof
+	batch.StateRoot = finalRoot
+	// Store previous root in proof for verification
+	proofData := append(initialRoot[:], finalRoot[:]...)
+	batch.Proof = proofData
+
 	s.batchInProgress = false
 	s.currentBatch = nil
+	return nil
 }
