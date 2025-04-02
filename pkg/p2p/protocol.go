@@ -14,8 +14,8 @@ import (
 const (
 	// Protocol IDs
 	TransactionProtocolID = protocol.ID("/zkrollup/tx/1.0.0")
-	BatchProtocolID      = protocol.ID("/zkrollup/batch/1.0.0")
-	ConsensusProtocolID  = protocol.ID("/zkrollup/consensus/1.0.0")
+	BatchProtocolID       = protocol.ID("/zkrollup/batch/1.0.0")
+	ConsensusProtocolID   = protocol.ID("/zkrollup/consensus/1.0.0")
 )
 
 // Message types
@@ -29,15 +29,15 @@ const (
 
 // Message represents a P2P network message
 type Message struct {
-	Type    MessageType     `json:"type"`
-	Payload []byte         `json:"payload"`
+	Type    MessageType `json:"type"`
+	Payload []byte      `json:"payload"`
 }
 
 // Protocol handlers
 type ProtocolHandlers struct {
 	OnTransaction func(tx *state.Transaction) error
-	OnBatch      func(batch *state.Batch) error
-	OnConsensus  func(msg []byte) error
+	OnBatch       func(batch *state.Batch) error
+	OnConsensus   func(msg []byte) error
 }
 
 // SetupProtocols sets up protocol handlers for the node

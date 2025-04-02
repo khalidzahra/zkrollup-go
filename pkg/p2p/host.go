@@ -106,10 +106,9 @@ func NewNode(ctx context.Context, port int, bootstrapPeers []string) (*Node, err
 	node.setupDiscovery()
 
 	// Print node info
-	fmt.Printf("Node started with ID: %s\n", h.ID().String())
-	fmt.Printf("Node addresses:\n")
+	log.Info().Str("id", h.ID().String()).Msg("Node started")
 	for _, addr := range h.Addrs() {
-		fmt.Printf("  %s/p2p/%s\n", addr, h.ID().String())
+		log.Info().Str("addr", addr.String()).Msg("Node address")
 	}
 
 	return node, nil
@@ -174,9 +173,14 @@ func (n *Node) setupDiscovery() {
 
 				// Connect to discovered peers
 				for peer := range peers {
-					fmt.Printf("Discovered peer: %s", peer.ID)
+					log.Debug().Str("peer", peer.ID.String()).Msg("Discovered peer")
 					if peer.ID == n.Host.ID() {
 						continue // Skip self
+					}
+
+					if n.Host.Network().Connectedness(peer.ID) == network.Connected {
+						log.Debug().Str("peer", peer.ID.String()).Msg("Already connected to peer")
+						continue // Skip already connected peers
 					}
 
 					n.peersLock.Lock()
@@ -188,7 +192,7 @@ func (n *Node) setupDiscovery() {
 						continue
 					}
 
-					fmt.Printf("Connected to peer: %s\n", peer.ID)
+					log.Info().Str("peer", peer.ID.String()).Msg("Connected to peer")
 				}
 			}
 		}
@@ -198,11 +202,11 @@ func (n *Node) setupDiscovery() {
 	n.Host.Network().Notify(&network.NotifyBundle{
 		ConnectedF: func(net network.Network, conn network.Conn) {
 			peer := conn.RemotePeer()
-			fmt.Printf("Connected to peer: %s\n", peer)
+			log.Info().Str("peer", peer.String()).Msg("Connected to peer")
 		},
 		DisconnectedF: func(net network.Network, conn network.Conn) {
 			peer := conn.RemotePeer()
-			fmt.Printf("Disconnected from peer: %s\n", peer)
+			log.Info().Str("peer", peer.String()).Msg("Disconnected from peer")
 		},
 	})
 }
@@ -214,7 +218,7 @@ func (n *Node) Close() error {
 
 	// Close DHT
 	if err := n.dht.Close(); err != nil {
-		fmt.Printf("Error closing DHT: %v\n", err)
+		log.Error().Err(err).Msg("Error closing DHT")
 	}
 
 	// Close host
