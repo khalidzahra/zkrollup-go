@@ -8,6 +8,7 @@ import (
 
 	"zkrollup/pkg/core"
 	"zkrollup/pkg/crypto"
+	"zkrollup/pkg/p2p"
 	"zkrollup/pkg/state"
 )
 
@@ -33,18 +34,30 @@ type Sequencer struct {
 
 	// ZK proof generation
 	prover *crypto.Prover
+
+	// P2P networking
+	node *p2p.Node
 }
 
-func NewSequencer(config *core.Config) (*Sequencer, error) {
+func NewSequencer(config *core.Config, port int) (*Sequencer, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
+	// Create P2P node
+	node, err := p2p.NewNode(ctx, port)
+	if err != nil {
+		cancel()
+		return nil, fmt.Errorf("failed to create P2P node: %v", err)
+	}
+
+	// Create prover
 	prover, err := crypto.NewProver()
 	if err != nil {
 		cancel()
 		return nil, fmt.Errorf("failed to create prover: %v", err)
 	}
 
-	return &Sequencer{
+	// Create sequencer
+	seq := &Sequencer{
 		config:      config,
 		state:       state.NewState(),
 		txPool:      make([]state.Transaction, 0),
@@ -53,7 +66,17 @@ func NewSequencer(config *core.Config) (*Sequencer, error) {
 		ctx:         ctx,
 		cancel:      cancel,
 		prover:      prover,
-	}, nil
+		node:        node,
+	}
+
+	// Setup P2P protocol handlers
+	node.SetupProtocols(&p2p.ProtocolHandlers{
+		OnTransaction: seq.handleTransaction,
+		OnBatch:       seq.handleBatch,
+		OnConsensus:   seq.handleConsensus,
+	})
+
+	return seq, nil
 }
 
 func (s *Sequencer) Start() error {
@@ -64,6 +87,7 @@ func (s *Sequencer) Start() error {
 
 func (s *Sequencer) Stop() {
 	s.cancel()
+	s.node.Close()
 }
 
 func (s *Sequencer) AddTransaction(tx state.Transaction) error {
@@ -121,8 +145,10 @@ func (s *Sequencer) tryCreateBatch() {
 	s.batchInProgress = true
 	s.currentBatch = batch
 
-	// Propose batch to network
-	s.proposalCh <- *batch
+	// Broadcast batch to network
+	if err := s.node.BroadcastBatch(s.ctx, batch); err != nil {
+		fmt.Printf("Failed to broadcast batch: %v\n", err)
+	}
 }
 
 func (s *Sequencer) participateConsensus() {
@@ -134,6 +160,21 @@ func (s *Sequencer) participateConsensus() {
 			s.processFinalizedBatch(batch)
 		}
 	}
+}
+
+// P2P message handlers
+func (s *Sequencer) handleTransaction(tx *state.Transaction) error {
+	return s.AddTransaction(*tx)
+}
+
+func (s *Sequencer) handleBatch(batch *state.Batch) error {
+	s.consensusCh <- *batch
+	return nil
+}
+
+func (s *Sequencer) handleConsensus(msg []byte) error {
+	// TODO: Implement consensus message handling
+	return nil
 }
 
 func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
