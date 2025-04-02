@@ -166,7 +166,6 @@ func (n *Node) setupDiscovery() {
 			case <-n.discoveryCtx.Done():
 				return
 			case <-time.After(DiscoveryInterval):
-				log.Info().Msg("Discovering peers...")
 				peers, err := routingDiscovery.FindPeers(n.discoveryCtx, DiscoveryNamespace)
 				if err != nil {
 					fmt.Printf("Failed to find peers: %v\n", err)
@@ -175,7 +174,7 @@ func (n *Node) setupDiscovery() {
 
 				// Connect to discovered peers
 				for peer := range peers {
-					log.Info().Msgf("Discovered peer: %s", peer.ID)
+					fmt.Printf("Discovered peer: %s", peer.ID)
 					if peer.ID == n.Host.ID() {
 						continue // Skip self
 					}
