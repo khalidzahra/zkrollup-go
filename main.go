@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"strconv"
+	"strings"
 	"syscall"
 
 	"zkrollup/pkg/core"
@@ -14,14 +15,21 @@ import (
 func main() {
 	config := core.DefaultConfig()
 
+	// Get port from environment variable or use default
 	port, err := strconv.Atoi(os.Getenv("SEQUENCER_PORT"))
 	if err != nil {
 		log.Fatalf("Failed to parse sequencer port, using default port: %v", err)
 		port = config.SequencerPort
 	}
 
-	// Initialize sequencer with P2P port
-	seq, err := sequencer.NewSequencer(config, port)
+	// Get bootstrap peers from environment variable
+	var bootstrapPeers []string
+	if peers := os.Getenv("BOOTSTRAP_PEERS"); peers != "" {
+		bootstrapPeers = strings.Split(peers, ",")
+	}
+
+	// Initialize sequencer
+	seq, err := sequencer.NewSequencer(config, port, bootstrapPeers)
 	if err != nil {
 		log.Fatalf("Failed to create sequencer: %v", err)
 	}

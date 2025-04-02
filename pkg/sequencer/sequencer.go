@@ -39,11 +39,11 @@ type Sequencer struct {
 	node *p2p.Node
 }
 
-func NewSequencer(config *core.Config, port int) (*Sequencer, error) {
+func NewSequencer(config *core.Config, port int, bootstrapPeers []string) (*Sequencer, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	// Create P2P node
-	node, err := p2p.NewNode(ctx, port)
+	node, err := p2p.NewNode(ctx, port, bootstrapPeers)
 	if err != nil {
 		cancel()
 		return nil, fmt.Errorf("failed to create P2P node: %v", err)
