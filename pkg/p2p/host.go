@@ -108,7 +108,7 @@ func NewNode(ctx context.Context, port int, bootstrapPeers []string) (*Node, err
 	// Print node info
 	log.Info().Str("id", h.ID().String()).Msg("Node started")
 	for _, addr := range h.Addrs() {
-		log.Info().Str("addr", addr.String()).Msg("Node address")
+		log.Info().Str("addr", addr.Multiaddr().String()+"/p2p/"+h.ID().String()).Msg("Node address")
 	}
 
 	return node, nil
