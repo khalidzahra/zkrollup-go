@@ -28,8 +28,11 @@ func main() {
 		bootstrapPeers = strings.Split(peers, ",")
 	}
 
+	// Check if this node is a leader
+	isLeader := os.Getenv("IS_LEADER") == "true"
+
 	// Initialize sequencer
-	seq, err := sequencer.NewSequencer(config, port, bootstrapPeers)
+	seq, err := sequencer.NewSequencer(config, port, bootstrapPeers, isLeader)
 	if err != nil {
 		log.Fatalf("Failed to create sequencer: %v", err)
 	}

@@ -39,6 +39,7 @@ type State struct {
 	accounts    map[[20]byte]*Account
 	stateTree   *MerkleTree
 	batchNumber uint64
+	batches     []*Batch // Store finalized batches
 }
 
 func NewState() *State {
@@ -46,6 +47,7 @@ func NewState() *State {
 		accounts:    make(map[[20]byte]*Account),
 		stateTree:   NewMerkleTree(32), // 32 levels deep
 		batchNumber: 0,
+		batches:     make([]*Batch, 0),
 	}
 }
 
@@ -93,4 +95,30 @@ func (s *State) GetStateRoot() [32]byte {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return s.stateTree.GetRoot()
+}
+
+// AddBatch adds a finalized batch to the state and increments the batch number
+func (s *State) AddBatch(batch *Batch) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	
+	// Set the batch number
+	batch.BatchNumber = s.batchNumber
+	
+	// Add the batch to our history
+	s.batches = append(s.batches, batch)
+	
+	// Increment the batch number for the next batch
+	s.batchNumber++
+}
+
+// GetBatches returns all finalized batches
+func (s *State) GetBatches() []*Batch {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	
+	// Return a copy to avoid race conditions
+	batchesCopy := make([]*Batch, len(s.batches))
+	copy(batchesCopy, s.batches)
+	return batchesCopy
 }

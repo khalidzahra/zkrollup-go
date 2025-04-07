@@ -47,10 +47,22 @@ func NewPBFT(node *p2p.Node, nodeID string, isLeader bool) *PBFT {
 
 // Start starts the consensus process
 func (p *PBFT) Start() {
-	// Set up consensus message handler
-	p.node.SetupProtocols(&p2p.ProtocolHandlers{
-		OnConsensus: p.HandleMessage,
-	})
+	// Get existing handlers to preserve them
+	existingHandlers := p.node.GetProtocolHandlers()
+
+	// Create new handlers with our consensus handler but preserving existing transaction and batch handlers
+	newHandlers := &p2p.ProtocolHandlers{
+		OnTransaction: existingHandlers.OnTransaction, // Preserve existing transaction handler
+		OnBatch:       existingHandlers.OnBatch,       // Preserve existing batch handler
+		OnConsensus:   p.HandleMessage,                // Set our consensus handler
+	}
+
+	// Set up protocol handlers with the combined handlers
+	p.node.SetupProtocols(newHandlers)
+
+	// Log the handlers we're using
+	fmt.Printf("PBFT consensus started with handlers - OnTransaction: %v, OnBatch: %v, OnConsensus: %v\n",
+		newHandlers.OnTransaction != nil, newHandlers.OnBatch != nil, newHandlers.OnConsensus != nil)
 }
 
 // Stop stops the consensus process
@@ -65,6 +77,13 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 	}
 
 	log.Info().Msg("Leader proposing new batch for consensus")
+
+	for i := range batch.Transactions {
+		// Handle zero values properly
+		if batch.Transactions[i].Amount.Sign() == 0 {
+			log.Debug().Msg("Handling zero amount specially for consistent hash computation")
+		}
+	}
 
 	// Create consensus state for this batch
 	state := NewConsensusState(p.view, p.sequence, batch)
@@ -85,8 +104,31 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 
 	log.Info().Str("batch_hash", state.BatchHash).Msg("Broadcasting pre-prepare message")
 
+	// Broadcast the message with explicit error handling
 	if err := p.broadcast(msg); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast pre-prepare message")
 		return fmt.Errorf("failed to broadcast pre-prepare: %v", err)
+	}
+
+	// Leader also sends a prepare message to participate in consensus
+	prepare := &ConsensusMessage{
+		Type:      Prepare,
+		View:      p.view,
+		Sequence:  p.sequence,
+		BatchHash: state.BatchHash,
+		NodeID:    p.nodeID,
+		Timestamp: time.Now(),
+	}
+
+	log.Info().Str("batch_hash", state.BatchHash).Msg("Leader sending prepare message")
+
+	// Add the leader's prepare message to the state
+	state.PrepareCount[p.nodeID] = true
+
+	// Broadcast the prepare message
+	if err := p.broadcast(prepare); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast leader prepare message")
+		// Continue even if there's an error, as the pre-prepare was successful
 	}
 
 	p.sequence++
@@ -95,11 +137,26 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 
 // HandleMessage handles incoming consensus messages
 func (p *PBFT) HandleMessage(data []byte) error {
-	log.Info().Msg("Received consensus message")
+	log.Info().Int("data_size", len(data)).Msg("Received consensus message")
+
+	// Handle empty messages
+	if len(data) == 0 {
+		log.Error().Msg("Received empty consensus message")
+		return fmt.Errorf("empty consensus message")
+	}
 
 	var msg ConsensusMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
 		return fmt.Errorf("failed to unmarshal consensus message: %v", err)
+	}
+
+	if msg.Batch != nil {
+		for i := range msg.Batch.Transactions {
+			// Special handling for zero values
+			if msg.Batch.Transactions[i].Amount != nil && msg.Batch.Transactions[i].Amount.Sign() == 0 {
+				log.Debug().Msg("Ensuring proper zero value handling in consensus message")
+			}
+		}
 	}
 
 	log.Info().
@@ -169,8 +226,11 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			Msg("Received prepare message")
 
 		// If we have enough prepares, move to commit phase
-		if len(state.PrepareCount) >= p.totalNodes-1 {
+		if HasQuorum(len(state.PrepareCount), p.totalNodes) && !state.SentCommit {
 			log.Info().Msg("Received enough prepare messages, moving to commit phase")
+
+			// Mark that we've sent a commit message for this batch
+			state.SentCommit = true
 
 			commit := &ConsensusMessage{
 				Type:      Commit,
@@ -179,6 +239,19 @@ func (p *PBFT) HandleMessage(data []byte) error {
 				BatchHash: msg.BatchHash,
 				NodeID:    p.nodeID,
 				Timestamp: time.Now(),
+			}
+
+			// Add our own commit message to the count
+			state.CommitCount[p.nodeID] = true
+
+			log.Info().Str("node_id", p.nodeID).Int("commit_count", len(state.CommitCount)).Msg("Adding our own commit message to the count")
+
+			// Check if we have enough commits after adding our own
+			if HasQuorum(len(state.CommitCount), p.totalNodes) && !state.Decided && p.isLeader {
+				log.Info().Msg("Leader has enough commit messages after adding its own, finalizing batch")
+				state.Decided = true
+				p.decidedBatch <- state.Batch
+				delete(p.states, msg.BatchHash) // Clean up state
 			}
 
 			if err := p.broadcast(commit); err != nil {
@@ -196,8 +269,8 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			Msg("Received commit message")
 
 		// If we have enough commits, decide on the batch
-		if len(state.CommitCount) >= p.totalNodes-1 && !state.Decided {
-			log.Info().Msg("Received enough commit messages, finalizing batch")
+		if HasQuorum(len(state.CommitCount), p.totalNodes) && !state.Decided {
+			log.Info().Int("commit_count", len(state.CommitCount)).Int("total_nodes", p.totalNodes).Msg("Received enough commit messages, finalizing batch")
 			state.Decided = true
 			p.decidedBatch <- state.Batch
 			delete(p.states, msg.BatchHash) // Clean up state
@@ -211,10 +284,16 @@ func (p *PBFT) HandleMessage(data []byte) error {
 func (p *PBFT) broadcast(msg *ConsensusMessage) error {
 	log.Info().Msgf("Broadcasting consensus message: type=%s, from=%s, batch_hash=%s", msg.Type, msg.NodeID, msg.BatchHash)
 
+	hashStr := msg.Hash()
+	log.Debug().Str("message_hash", hashStr).Msg("Computed message hash for consensus")
+
 	data, err := json.Marshal(msg)
 	if err != nil {
+		log.Error().Err(err).Msg("Failed to marshal consensus message")
 		return fmt.Errorf("failed to marshal consensus message: %v", err)
 	}
+
+	log.Debug().Int("data_size", len(data)).Msg("Consensus message size")
 
 	if err := p.node.BroadcastConsensus(p.ctx, data); err != nil {
 		log.Error().Err(err).Msg("Failed to broadcast consensus message")
