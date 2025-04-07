@@ -110,6 +110,15 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 		return fmt.Errorf("failed to broadcast pre-prepare: %v", err)
 	}
 
+	// Check if we're in standalone mode (no peers)
+	if p.totalNodes <= 1 {
+		log.Info().Str("batch_hash", state.BatchHash).Msg("Running in standalone mode, automatically committing batch")
+		// In standalone mode, we can automatically commit the batch
+		state.CommitCount[p.nodeID] = true
+		// Send the batch to the decided channel
+		p.decidedBatch <- batch
+	}
+
 	// Leader also sends a prepare message to participate in consensus
 	prepare := &ConsensusMessage{
 		Type:      Prepare,
@@ -129,6 +138,13 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 	if err := p.broadcast(prepare); err != nil {
 		log.Error().Err(err).Msg("Failed to broadcast leader prepare message")
 		// Continue even if there's an error, as the pre-prepare was successful
+	}
+
+	// In standalone mode, we also need to update the commit count
+	if p.totalNodes <= 1 {
+		log.Info().Str("batch_hash", state.BatchHash).Msg("Standalone mode: Updating commit count")
+		// No need to create and broadcast a commit message, just update the state
+		state.CommitCount[p.nodeID] = true
 	}
 
 	p.sequence++

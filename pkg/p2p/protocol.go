@@ -303,8 +303,9 @@ func (n *Node) BroadcastConsensus(ctx context.Context, payload []byte) error {
 func (n *Node) broadcast(ctx context.Context, protocolID protocol.ID, msg Message) error {
 	peers := n.GetPeers()
 	if len(peers) == 0 {
-		fmt.Printf("No peers available for broadcasting protocol %s\n", protocolID)
-		return fmt.Errorf("no peers available for broadcast")
+		fmt.Printf("No peers available for broadcasting protocol %s, continuing in standalone mode\n", protocolID)
+		// In standalone mode, we don't need to broadcast, so just return success
+		return nil
 	}
 
 	fmt.Printf("Broadcasting to %d peers using protocol %s\n", len(peers), protocolID)

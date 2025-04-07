@@ -3,19 +3,21 @@ package sequencer
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math/big"
 	"sync"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/rs/zerolog/log"
 
 	"zkrollup/pkg/consensus"
 	"zkrollup/pkg/core"
 	"zkrollup/pkg/crypto"
+	"zkrollup/pkg/evm"
 	"zkrollup/pkg/p2p"
 	"zkrollup/pkg/state"
-	"zkrollup/pkg/util"
 )
 
 type Sequencer struct {
@@ -25,6 +27,9 @@ type Sequencer struct {
 	// Transaction pool
 	txPool []state.Transaction
 	poolMu sync.RWMutex
+
+	// EVM executor
+	evmExecutor *evm.EVMExecutor
 
 	// Batch processing
 	currentBatch    *state.Batch
@@ -83,6 +88,7 @@ func NewSequencer(config *core.Config, port int, bootstrapPeers []string, isLead
 		node:        node,
 		isLeader:    isLeader,
 		peerCount:   1, // Start with just ourselves
+		evmExecutor: evm.NewEVMExecutor(),
 	}
 
 	// Create consensus instance
@@ -157,22 +163,33 @@ func (s *Sequencer) AddTransaction(tx state.Transaction) error {
 	defer s.poolMu.Unlock()
 
 	// Get or initialize the sender account
-	acc := s.state.GetAccount(tx.From)
-
-	// If this is a new account, initialize it with a balance for testing
-	if acc.Balance == nil || acc.Balance.Sign() == 0 {
+	acc, err := s.state.GetAccount(tx.From)
+	if err != nil || acc == nil {
+		// If this is a new account, initialize it with a balance for testing
 		log.Info().Str("address", fmt.Sprintf("%x", tx.From)).Msg("Initializing new account with test balance")
+		acc = &state.Account{
+			Address: tx.From,
+			Balance: big.NewInt(1000), // Initialize with 1000 units
+			Nonce:   0,
+		}
+		s.state.SetAccount(acc)
+	} else if acc.Balance == nil || acc.Balance.Sign() == 0 {
+		// Ensure account has a balance
+		log.Info().Str("address", fmt.Sprintf("%x", tx.From)).Msg("Setting test balance for account")
 		acc.Balance = big.NewInt(1000) // Initialize with 1000 units
-		acc.Nonce = 0
-		s.state.UpdateAccount(acc)
+		s.state.SetAccount(acc)
 	}
 
 	// Initialize recipient account if needed
-	recipient := s.state.GetAccount(tx.To)
-	if recipient.Balance == nil {
+	recipient, err := s.state.GetAccount(tx.To)
+	if err != nil || recipient == nil || recipient.Balance == nil {
 		log.Info().Str("address", fmt.Sprintf("%x", tx.To)).Msg("Initializing recipient account")
-		recipient.Balance = big.NewInt(0)
-		s.state.UpdateAccount(recipient)
+		recipient = &state.Account{
+			Address: tx.To,
+			Balance: big.NewInt(0),
+			Nonce:   0,
+		}
+		s.state.SetAccount(recipient)
 	}
 
 	// Basic transaction validation
@@ -266,7 +283,7 @@ func (s *Sequencer) participateConsensus() {
 // P2P message handlers
 func (s *Sequencer) handleTransaction(tx *state.Transaction) error {
 	// Log that we're handling a transaction
-	log.Info().Str("from", fmt.Sprintf("%x", tx.From)).Str("to", fmt.Sprintf("%x", tx.To)).Msg("Handling transaction in sequencer")
+	log.Info().Str("from", fmt.Sprintf("%x", tx.From)).Str("to", fmt.Sprintf("%x", tx.To)).Uint8("type", uint8(tx.Type)).Msg("Handling transaction in sequencer")
 
 	// Special handling for zero values to ensure consistent hash computation
 	if tx.Amount != nil && tx.Amount.Sign() == 0 {
@@ -277,6 +294,20 @@ func (s *Sequencer) handleTransaction(tx *state.Transaction) error {
 	// The nonce must be converted to a string representation when used in the circuit
 	nonceStr := fmt.Sprintf("%d", tx.Nonce)
 	log.Info().Str("nonce_str", nonceStr).Msg("Using nonce string format for consistent hash computation")
+
+	// Verify transaction type-specific requirements
+	switch tx.Type {
+	case state.TxTypeContractDeploy, state.TxTypeContractCall:
+		// Ensure gas is provided for EVM transactions
+		if tx.Gas == 0 {
+			return errors.New("EVM transactions require gas")
+		}
+
+		// Ensure data is provided for contract deployment
+		if tx.Type == state.TxTypeContractDeploy && len(tx.Data) == 0 {
+			return errors.New("contract deployment requires bytecode")
+		}
+	}
 
 	// Add the transaction to the sequencer's pool
 	return s.AddTransaction(*tx)
@@ -333,58 +364,54 @@ func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
 	s.batchMu.Lock()
 	defer s.batchMu.Unlock()
 
-	// Get initial state root
-	initialRoot := s.state.GetStateRoot()
+	// Get initial state root for proof generation
+	initialStateRoot := s.state.GetStateRoot()
 
 	// Apply transactions and generate proofs
 	for _, tx := range batch.Transactions {
-		from := s.state.GetAccount(tx.From)
-		to := s.state.GetAccount(tx.To)
-
-		// Create circuit assignment with consistent formatting
-		// Use util.FormatAmount to ensure consistent string representation
-		// assignment := &crypto.TransactionCircuit{
-		// 	// Ensure consistent formatting for amount
-		// 	Amount: util.FormatAmount(tx.Amount),
-		// 	// Ensure consistent formatting for balance
-		// 	Balance: util.FormatAmount(from.Balance),
-		// 	// Ensure consistent formatting for nonce
-		// 	Nonce: util.GetNonceForHash(from.Nonce),
-		// }
-
-		log.Debug().Str("nonce", util.GetNonceForHash(from.Nonce)).Msg("Using formatted nonce for circuit")
-
-		// Handle zero values properly
-		if tx.Amount.Sign() == 0 {
-			log.Debug().Msg("Handling zero amount specially for consistent hash computation")
+		// Get sender account
+		sender, err := s.state.GetAccount(tx.From)
+		if err != nil {
+			log.Error().Err(err).Str("address", formatAddress(tx.From)).Msg("Failed to get sender account")
+			continue
 		}
 
-		// // Generate and verify proof
-		// proof, err := s.prover.GenerateProof(assignment)
-		// if err != nil {
-		// 	return fmt.Errorf("failed to generate proof: %v", err)
-		// }
+		// Verify nonce
+		if tx.Nonce != sender.Nonce {
+			log.Error().Uint64("expected", sender.Nonce).Uint64("got", tx.Nonce).Msg("Invalid nonce")
+			continue
+		}
 
-		// // Verify proof
-		// valid, err := s.prover.VerifyProof(proof, assignment)
-		// if err != nil {
-		// 	return fmt.Errorf("failed to verify proof: %v", err)
-		// }
+		// Process transaction based on type
+		switch tx.Type {
+		case state.TxTypeTransfer:
+			// Process a simple transfer transaction
+			err := s.processTransferTransaction(tx, sender)
+			if err != nil {
+				log.Error().Err(err).Msg("Failed to process transfer transaction")
+				continue
+			}
 
-		// if !valid {
-		// 	return fmt.Errorf("invalid transaction proof")
-		// }
+		case state.TxTypeContractDeploy:
+			// Process a contract deployment transaction
+			err := s.processContractDeployment(tx, sender)
+			if err != nil {
+				log.Error().Err(err).Msg("Failed to process contract deployment")
+				continue
+			}
 
-		// // Store proof
-		// tx.Signature = proof
+		case state.TxTypeContractCall:
+			// Process a contract call transaction
+			err := s.processContractCall(tx, sender)
+			if err != nil {
+				log.Error().Err(err).Msg("Failed to process contract call")
+				continue
+			}
 
-		// Update state
-		from.Balance.Sub(from.Balance, tx.Amount)
-		from.Nonce++
-		to.Balance.Add(to.Balance, tx.Amount)
-
-		s.state.UpdateAccount(from)
-		s.state.UpdateAccount(to)
+		default:
+			log.Error().Uint8("type", uint8(tx.Type)).Msg("Unknown transaction type")
+			continue
+		}
 	}
 
 	// Get final state root and generate state transition proof
@@ -393,7 +420,7 @@ func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
 	// Store batch proof
 	batch.StateRoot = finalRoot
 	// Store previous root in proof for verification
-	proofData := append(initialRoot[:], finalRoot[:]...)
+	proofData := append(initialStateRoot[:], finalRoot[:]...)
 	batch.Proof = proofData
 
 	// Add the finalized batch to the state's batch history
@@ -410,5 +437,135 @@ func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
 
 	s.batchInProgress = false
 	s.currentBatch = nil
+	return nil
+}
+
+// processTransferTransaction processes a simple token transfer transaction
+func (s *Sequencer) processTransferTransaction(tx state.Transaction, sender *state.Account) error {
+	// Verify balance
+	if sender.Balance.Cmp(tx.Amount) < 0 {
+		return fmt.Errorf("insufficient balance: have %s, need %s", sender.Balance.String(), tx.Amount.String())
+	}
+
+	// Handle zero values consistently as per memory requirements
+	if tx.Amount.Cmp(big.NewInt(0)) == 0 {
+		// Use a single byte with value 0 instead of an empty array
+		tx.Amount = big.NewInt(0)
+	}
+
+	// Update sender balance
+	sender.Balance = new(big.Int).Sub(sender.Balance, tx.Amount)
+	s.state.SetAccount(sender)
+
+	// Update recipient account
+	recipient, err := s.state.GetAccount(tx.To)
+	if err != nil || recipient == nil {
+		// Create recipient account if it doesn't exist
+		recipient = &state.Account{
+			Address: tx.To,
+			Balance: tx.Amount,
+			Nonce:   0,
+		}
+	} else {
+		// Add amount to existing balance
+		recipient.Balance = new(big.Int).Add(recipient.Balance, tx.Amount)
+	}
+	s.state.SetAccount(recipient)
+
+	log.Info().Str("from", formatAddress(tx.From)).Str("to", formatAddress(tx.To)).Str("amount", tx.Amount.String()).Msg("Applied transfer transaction")
+	return nil
+}
+
+// processContractDeployment processes a contract deployment transaction
+func (s *Sequencer) processContractDeployment(tx state.Transaction, sender *state.Account) error {
+	// Verify balance for the value being sent with contract creation
+	if sender.Balance.Cmp(tx.Amount) < 0 {
+		return fmt.Errorf("insufficient balance for contract deployment: have %s, need %s", sender.Balance.String(), tx.Amount.String())
+	}
+
+	// Special handling for zero values to ensure consistent message hash computation
+	if tx.Amount != nil && tx.Amount.Cmp(big.NewInt(0)) == 0 {
+		// Use a single byte with value 0 instead of an empty array
+		tx.Amount = big.NewInt(0)
+	}
+
+	// Create EVM state adapter
+	stateAdapter := evm.NewStateAdapter(s.state)
+
+	// Convert addresses to Ethereum format
+	callerAddr := common.BytesToAddress(tx.From[:])
+
+	// Deploy the contract
+	contractAddr, remainingGas, err := s.evmExecutor.DeployContract(
+		stateAdapter,
+		callerAddr,
+		tx.Amount,
+		tx.Gas,
+		tx.Data,
+	)
+
+	if err != nil {
+		return fmt.Errorf("contract deployment failed: %w", err)
+	}
+
+	// Convert contract address back to rollup format
+	var contractRollupAddr [20]byte
+	copy(contractRollupAddr[:], contractAddr.Bytes())
+
+	// Update sender account
+	sender.Balance = new(big.Int).Sub(sender.Balance, tx.Amount)
+	sender.Nonce++
+	s.state.SetAccount(sender)
+
+	// Apply all state changes from the EVM execution
+	stateAdapter.ApplyChanges()
+
+	log.Info().Str("from", formatAddress(tx.From)).Str("contract", contractAddr.Hex()).Str("gas_used", fmt.Sprintf("%d", tx.Gas-remainingGas)).Msg("Deployed contract")
+	return nil
+}
+
+// processContractCall processes a contract call transaction
+func (s *Sequencer) processContractCall(tx state.Transaction, sender *state.Account) error {
+	// Verify balance for the value being sent with the call
+	if sender.Balance.Cmp(tx.Amount) < 0 {
+		return fmt.Errorf("insufficient balance for contract call: have %s, need %s", sender.Balance.String(), tx.Amount.String())
+	}
+
+	// Special handling for zero values to ensure consistent message hash computation
+	if tx.Amount != nil && tx.Amount.Cmp(big.NewInt(0)) == 0 {
+		// Use a single byte with value 0 instead of an empty array
+		tx.Amount = big.NewInt(0)
+	}
+
+	// Create EVM state adapter
+	stateAdapter := evm.NewStateAdapter(s.state)
+
+	// Convert addresses to Ethereum format
+	callerAddr := common.BytesToAddress(tx.From[:])
+	contractAddr := common.BytesToAddress(tx.To[:])
+
+	// Execute the contract call
+	returnData, remainingGas, err := s.evmExecutor.ExecuteContract(
+		stateAdapter,
+		callerAddr,
+		contractAddr,
+		tx.Amount,
+		tx.Gas,
+		tx.Data,
+	)
+
+	if err != nil {
+		return fmt.Errorf("contract call failed: %w", err)
+	}
+
+	// Update sender account
+	sender.Balance = new(big.Int).Sub(sender.Balance, tx.Amount)
+	sender.Nonce++
+	s.state.SetAccount(sender)
+
+	// Apply all state changes from the EVM execution
+	stateAdapter.ApplyChanges()
+
+	log.Info().Str("from", formatAddress(tx.From)).Str("contract", contractAddr.Hex()).Str("gas_used", fmt.Sprintf("%d", tx.Gas-remainingGas)).Int("return_data_size", len(returnData)).Msg("Called contract")
 	return nil
 }
