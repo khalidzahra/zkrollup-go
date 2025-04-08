@@ -1,2 +1,6 @@
 bin
 data
+.env
+.env.*
+demo_data
+logs

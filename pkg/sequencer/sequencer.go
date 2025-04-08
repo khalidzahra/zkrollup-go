@@ -16,6 +16,7 @@ import (
 	"zkrollup/pkg/core"
 	"zkrollup/pkg/crypto"
 	"zkrollup/pkg/evm"
+	"zkrollup/pkg/l1"
 	"zkrollup/pkg/p2p"
 	"zkrollup/pkg/state"
 )
@@ -49,6 +50,11 @@ type Sequencer struct {
 	// P2P networking
 	node *p2p.Node
 
+	// L1 integration
+	l1Client     *l1.Client
+	l1Enabled    bool
+	l1SubmitChan chan state.Batch
+
 	// Consensus
 	consensus *consensus.PBFT
 	isLeader  bool
@@ -77,18 +83,20 @@ func NewSequencer(config *core.Config, port int, bootstrapPeers []string, isLead
 
 	// Create sequencer
 	seq := &Sequencer{
-		config:      config,
-		state:       state.NewState(),
-		txPool:      make([]state.Transaction, 0),
-		proposalCh:  make(chan state.Batch),
-		consensusCh: make(chan state.Batch),
-		ctx:         ctx,
-		cancel:      cancel,
-		prover:      prover,
-		node:        node,
-		isLeader:    isLeader,
-		peerCount:   1, // Start with just ourselves
-		evmExecutor: evm.NewEVMExecutor(),
+		config:       config,
+		state:        state.NewState(),
+		txPool:       make([]state.Transaction, 0),
+		proposalCh:   make(chan state.Batch),
+		consensusCh:  make(chan state.Batch),
+		ctx:          ctx,
+		cancel:       cancel,
+		prover:       prover,
+		node:         node,
+		isLeader:     isLeader,
+		peerCount:    1, // Start with just ourselves
+		evmExecutor:  evm.NewEVMExecutor(),
+		l1Enabled:    config.L1Enabled,
+		l1SubmitChan: make(chan state.Batch, 10),
 	}
 
 	// Create consensus instance
@@ -101,6 +109,28 @@ func NewSequencer(config *core.Config, port int, bootstrapPeers []string, isLead
 		OnBatch:       seq.handleBatch,
 		OnConsensus:   seq.handleConsensus,
 	})
+
+	// Initialize L1 client if enabled
+	if config.L1Enabled && config.L1PrivateKey != "" {
+		l1Config := &l1.Config{
+			EthereumRPC:     config.EthereumRPC,
+			ChainID:         config.ChainID,
+			ContractAddress: config.ContractAddress,
+			PrivateKey:      config.L1PrivateKey,
+		}
+
+		l1Client, err := l1.NewClient(l1Config)
+		if err != nil {
+			log.Warn().Err(err).Msg("Failed to initialize L1 client, L1 integration disabled")
+			seq.l1Enabled = false
+		} else {
+			seq.l1Client = l1Client
+			log.Info().Msg("L1 integration enabled")
+		}
+	} else {
+		log.Info().Msg("L1 integration disabled")
+		seq.l1Enabled = false
+	}
 
 	return seq, nil
 }
@@ -124,6 +154,12 @@ func (s *Sequencer) Start() error {
 	go s.processBatches()
 	go s.participateConsensus()
 	go s.monitorPeerCount()
+
+	// Start L1 batch submission process if enabled
+	if s.l1Enabled && s.l1Client != nil {
+		go s.submitBatchesToL1()
+		log.Info().Msg("Started L1 batch submission process")
+	}
 
 	return nil
 }
@@ -156,6 +192,11 @@ func (s *Sequencer) Stop() {
 	s.consensus.Stop()
 	s.cancel()
 	s.node.Close()
+
+	// Close L1 submission channel
+	if s.l1Enabled && s.l1SubmitChan != nil {
+		close(s.l1SubmitChan)
+	}
 }
 
 func (s *Sequencer) AddTransaction(tx state.Transaction) error {
@@ -433,6 +474,17 @@ func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
 		// Continue processing even if broadcast fails
 	} else {
 		log.Info().Msg("Successfully broadcasted finalized batch to peers")
+	}
+
+	// Submit batch to L1 if enabled
+	if s.l1Enabled && s.l1Client != nil && s.l1SubmitChan != nil {
+		// Send batch to L1 submission channel
+		select {
+		case s.l1SubmitChan <- batch:
+			log.Info().Uint64("batch_number", batch.BatchNumber).Msg("Queued batch for L1 submission")
+		default:
+			log.Warn().Uint64("batch_number", batch.BatchNumber).Msg("L1 submission queue full, skipping batch")
+		}
 	}
 
 	s.batchInProgress = false
