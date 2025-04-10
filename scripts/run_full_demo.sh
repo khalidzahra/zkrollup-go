@@ -17,8 +17,15 @@ DEMO_DIR="./demo_data"
 PRIVATE_KEY="ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"  # Default Hardhat account
 CHAIN_ID=1337
 
-# Ensure the demo directory exists
-mkdir -p $DEMO_DIR
+# Ensure the demo directory exists with absolute path
+DEMO_DIR_ABS="$(cd "$(dirname "$0")/.." && pwd)/$DEMO_DIR"
+mkdir -p "$DEMO_DIR_ABS"
+
+# Use absolute paths for logs
+L1_LOG="$DEMO_DIR_ABS/l1_node.log"
+ROLLUP_LOG="$DEMO_DIR_ABS/rollup_node.log"
+
+echo "Using demo directory: $DEMO_DIR_ABS"
 
 echo -e "${BLUE}=== ZK-Rollup with L1 Integration Demo ===${NC}"
 echo -e "${BLUE}This script will:${NC}"
@@ -88,7 +95,7 @@ docker run -d --name hardhat-node \
     --ws.api=eth,net,web3 \
     --ws.origins='*' \
     --allow-insecure-unlock \
-    > $DEMO_DIR/l1_node.log 2>&1
+    > "$L1_LOG" 2>&1
 
 L1_NODE_CONTAINER_ID=$(docker ps -q -f name=hardhat-node)
 echo "L1 node started in Docker container: $L1_NODE_CONTAINER_ID"
@@ -163,7 +170,7 @@ echo -e "${BLUE}Contract deployed at: $CONTRACT_ADDRESS${NC}"
 # Step 3: Start the ZK-Rollup node with L1 integration
 echo -e "${YELLOW}Starting ZK-Rollup node with L1 integration...${NC}"
 L1_ENABLED=true \
-ETHEREUM_RPC=$ETHEREUM_RPC \
+ETHEREUM_RPC=http://localhost:$L1_PORT \
 CHAIN_ID=$CHAIN_ID \
 CONTRACT_ADDRESS=$CONTRACT_ADDRESS \
 L1_PRIVATE_KEY=$L1_PRIVATE_KEY \
@@ -171,26 +178,34 @@ L1_BATCH_SUBMIT_PERIOD=30 \
 SEQUENCER_PORT=$ROLLUP_PORT \
 RPC_PORT=$RPC_PORT \
 IS_LEADER=true \
-go run main.go > $DEMO_DIR/rollup_node.log 2>&1 &
+go run main.go > "$ROLLUP_LOG" 2>&1 &
 ROLLUP_NODE_PID=$!
 echo "ZK-Rollup node started with PID: $ROLLUP_NODE_PID"
 
 # Wait for the rollup node to start
 echo "Waiting for ZK-Rollup node to start..."
-echo "Logs available at: $DEMO_DIR/rollup_node.log"
+echo "Logs available at: $ROLLUP_LOG"
 sleep 5
 
 # Check if the rollup node is still running
 if ! kill -0 $ROLLUP_NODE_PID 2>/dev/null; then
     echo -e "${RED}Error: ZK-Rollup node failed to start. Check logs for details.${NC}"
     echo "Last 20 lines of log:"
-    tail -n 20 $DEMO_DIR/rollup_node.log
+    if [ -f "$ROLLUP_LOG" ]; then
+        tail -n 20 "$ROLLUP_LOG"
+    else
+        echo "Log file not found: $ROLLUP_LOG"
+    fi
     exit 1
 fi
 
 # Display some initial log output
 echo "Initial log output:"
-tail -n 10 $DEMO_DIR/rollup_node.log
+if [ -f "$ROLLUP_LOG" ]; then
+    tail -n 10 "$ROLLUP_LOG"
+else
+    echo "Log file not found: $ROLLUP_LOG"
+fi
 echo -e "${GREEN}ZK-Rollup node started successfully.${NC}"
 
 # Step 4: Submit transactions to create batches
@@ -262,15 +277,19 @@ done
 # Step 5: Verify that batches are posted to L1
 echo -e "${YELLOW}Verifying batches on L1...${NC}"
 echo "Checking the rollup node logs for batch submissions..."
-grep -i "submitted batch to l1" $DEMO_DIR/rollup_node.log || echo "No batch submissions found in logs yet."
+if [ -f "$ROLLUP_LOG" ]; then
+    grep -i "submitted batch to l1" "$ROLLUP_LOG" || echo "No batch submissions found in logs yet."
+else
+    echo "Log file not found: $ROLLUP_LOG"
+fi
 
 # Create a symbolic link to the logs directory for easier access
-ln -sf "$(realpath $DEMO_DIR)" ./logs
+ln -sf "$DEMO_DIR_ABS" "$(cd "$(dirname "$0")/.." && pwd)/logs"
 
 echo -e "${GREEN}Demo completed successfully!${NC}"
-echo -e "${BLUE}You can check the logs in the ./logs directory (symbolic link to $DEMO_DIR):${NC}"
-echo "  - L1 node log: ./logs/l1_node.log"
-echo "  - ZK-Rollup node log: ./logs/rollup_node.log"
+echo -e "${BLUE}You can check the logs in the ./logs directory (symbolic link to $DEMO_DIR_ABS):${NC}"
+echo "  - L1 node log: $L1_LOG"
+echo "  - ZK-Rollup node log: $ROLLUP_LOG"
 echo ""
 echo -e "${YELLOW}The demo is still running. Press Ctrl+C to stop all processes and clean up.${NC}"
 
@@ -278,5 +297,9 @@ echo -e "${YELLOW}The demo is still running. Press Ctrl+C to stop all processes 
 while true; do
     sleep 10
     echo -e "${BLUE}Checking for new batch submissions...${NC}"
-    grep -i "submitted batch to l1" $DEMO_DIR/rollup_node.log | tail -5 || echo "No new batch submissions found."
+    if [ -f "$ROLLUP_LOG" ]; then
+    grep -i "submitted batch to l1" "$ROLLUP_LOG" | tail -5 || echo "No new batch submissions found."
+else
+    echo "Log file not found: $ROLLUP_LOG"
+fi
 done
