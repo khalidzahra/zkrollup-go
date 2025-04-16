@@ -4,3 +4,4 @@ data
 .env.*
 demo_data
 logs
+build
