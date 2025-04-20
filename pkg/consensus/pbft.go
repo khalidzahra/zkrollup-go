@@ -1,7 +1,9 @@
 package consensus
 
 import (
+	"bytes"
 	"context"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"sync"
@@ -11,6 +13,11 @@ import (
 
 	"zkrollup/pkg/p2p"
 	"zkrollup/pkg/state"
+)
+
+const (
+	CRSEpochDuration        = 10 * time.Second
+	CRSParticipantsPerEpoch = 3
 )
 
 // PBFT represents a PBFT consensus instance
@@ -26,6 +33,10 @@ type PBFT struct {
 	decidedBatch chan *state.Batch
 	ctx          context.Context
 	cancel       context.CancelFunc
+
+	// CRS Ceremony integration
+	crsCeremony     *CRSCeremonyState
+	crsCeremonyLock sync.Mutex
 }
 
 // NewPBFT creates a new PBFT consensus instance
@@ -63,6 +74,8 @@ func (p *PBFT) Start() {
 	// Log the handlers we're using
 	fmt.Printf("PBFT consensus started with handlers - OnTransaction: %v, OnBatch: %v, OnConsensus: %v\n",
 		newHandlers.OnTransaction != nil, newHandlers.OnBatch != nil, newHandlers.OnConsensus != nil)
+
+	p.StartCRSEpochAdvancer(CRSEpochDuration, CRSParticipantsPerEpoch, p.GetSequencerIDs)
 }
 
 // Stop stops the consensus process
@@ -147,6 +160,23 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 		state.CommitCount[p.nodeID] = true
 	}
 
+	p.sequence++
+	return nil
+}
+
+// ProposeCRSEpoch proposes a new CRS epoch via PBFT consensus (leader only)
+func (p *PBFT) ProposeCRSEpoch(epoch CRSEpoch) error {
+	msg := &ConsensusMessage{
+		Type:      CRSEpochProposal,
+		View:      p.view,
+		Sequence:  p.sequence,
+		NodeID:    p.nodeID,
+		Timestamp: time.Now(),
+		CRSEpoch:  &epoch,
+	}
+	if err := p.broadcast(msg); err != nil {
+		return fmt.Errorf("failed to broadcast CRS epoch proposal: %v", err)
+	}
 	p.sequence++
 	return nil
 }
@@ -291,6 +321,64 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			p.decidedBatch <- state.Batch
 			delete(p.states, msg.BatchHash) // Clean up state
 		}
+
+	case CRSEpochProposal:
+		// Validate the epoch proposal (number, timing, participant selection)
+		// For now, accept if strictly increasing and not overlapping
+		current := GetCRSEpoch()
+		if msg.CRSEpoch.Number <= current.Number {
+			return fmt.Errorf("stale CRS epoch proposal")
+		}
+		if !current.StartTime.IsZero() && msg.CRSEpoch.StartTime.Before(current.StartTime.Add(current.Duration)) {
+			return fmt.Errorf("CRS epoch overlaps previous epoch")
+		}
+		// Optionally: validate participant selection is deterministic
+		SetCRSEpoch(*msg.CRSEpoch)
+		log.Info().Int64("number", msg.CRSEpoch.Number).Strs("participants", msg.CRSEpoch.Participants).Msg("Committed new CRS epoch")
+
+		// === CRS Ceremony Integration ===
+		sequencers := msg.CRSEpoch.Participants
+		initialCRS, _, err := GenerateInitialCRS(len(sequencers))
+		if err != nil {
+			return fmt.Errorf("failed to generate initial CRS: %w", err)
+		}
+		p.crsCeremonyLock.Lock()
+		p.crsCeremony = NewCRSCeremonyState(msg.CRSEpoch.Number, sequencers, initialCRS)
+		p.crsCeremonyLock.Unlock()
+		// If this node is first, contribute and broadcast
+		if sequencers[0] == p.nodeID {
+			go p.advanceCRSCeremony()
+		}
+		return nil
+
+	case CRSCeremony:
+		// Handle CRS Ceremony Message
+		p.crsCeremonyLock.Lock()
+		ceremony := p.crsCeremony
+		p.crsCeremonyLock.Unlock()
+		if ceremony == nil || msg.CRSCeremony.EpochNumber != ceremony.EpochNumber {
+			return nil // Ignore messages for other epochs
+		}
+		if msg.CRSCeremony.Step != ceremony.CurrentStep {
+			return nil // Ignore out-of-order steps
+		}
+		if msg.CRSCeremony.ContributorID != ceremony.Participants[ceremony.CurrentStep] {
+			return nil // Not the correct contributor
+		}
+		// Accept the contribution
+		ceremony.IntermediateCRS = msg.CRSCeremony.IntermediateCRS
+		ceremony.CurrentStep++
+		// If ceremony complete
+		if ceremony.CurrentStep >= len(ceremony.Participants) {
+			log.Info().Msg("CRS ceremony complete. Final CRS ready.")
+			// TODO: Anchor or store final CRS
+			return nil
+		}
+		// If it's now this node's turn, contribute and broadcast
+		if ceremony.Participants[ceremony.CurrentStep] == p.nodeID {
+			go p.advanceCRSCeremony()
+		}
+		return nil
 	}
 
 	return nil
@@ -316,6 +404,13 @@ func (p *PBFT) broadcast(msg *ConsensusMessage) error {
 		return err
 	}
 
+	// Self-delivery: process the message locally as if received from the network
+	go func() {
+		if err := p.HandleMessage(data); err != nil {
+			log.Error().Err(err).Msg("Failed to process own consensus message")
+		}
+	}()
+
 	log.Info().Msg("Successfully broadcasted consensus message")
 	return nil
 }
@@ -328,4 +423,94 @@ func (p *PBFT) GetDecidedBatchChan() <-chan *state.Batch {
 // UpdateTotalNodes updates the total number of nodes in the network
 func (p *PBFT) UpdateTotalNodes(count int) {
 	p.totalNodes = count
+}
+
+// StartCRSEpochAdvancer launches a goroutine that checks and advances the CRS epoch every interval
+func (p *PBFT) StartCRSEpochAdvancer(epochDuration time.Duration, participantsPerEpoch int, getSequencers func() []string) {
+	go func() {
+		ticker := time.NewTicker(time.Second)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-p.ctx.Done():
+				return
+			case <-ticker.C:
+				now := time.Now().UTC()
+				epoch := GetCRSEpoch()
+				if epoch.StartTime.IsZero() || now.After(epoch.StartTime.Add(epoch.Duration)) {
+					// Only leader proposes
+					if p.isLeader && (p.crsCeremony == nil || p.crsCeremony.Completed) {
+						sequencers := getSequencers()
+						log.Info().Strs("sequencers_seen", sequencers).Msg("[CRS Advancer] Sequencers visible to leader")
+						seed := sha256.Sum256([]byte(fmt.Sprintf("%d-%s", now.UnixNano(), sequencers)))
+						participants := SelectCRSParticipants(sequencers, participantsPerEpoch, seed[:])
+						log.Info().Strs("participants", participants).Msg("[CRS Advancer] Selected CRS participants for new epoch")
+						newEpoch := CRSEpoch{
+							Number:       epoch.Number + 1,
+							StartTime:    now,
+							Duration:     epochDuration,
+							Participants: participants,
+						}
+						_ = p.ProposeCRSEpoch(newEpoch)
+					}
+				}
+			}
+		}
+	}()
+}
+
+// GetSequencerIDs returns the current list of sequencer node IDs
+func (p *PBFT) GetSequencerIDs() []string {
+	peerIDs := p.node.GetPeers()
+	ids := make([]string, 0, len(peerIDs)+1)
+	ids = append(ids, p.nodeID) // Include self
+	for _, pid := range peerIDs {
+		ids = append(ids, pid.String())
+	}
+	return ids
+}
+
+// advanceCRSCeremony is called when it's this node's turn to contribute
+func (p *PBFT) advanceCRSCeremony() {
+	p.crsCeremonyLock.Lock()
+	ceremony := p.crsCeremony
+	p.crsCeremonyLock.Unlock()
+	if ceremony == nil {
+		return
+	}
+	if !ceremony.CheckTurn(p.nodeID) {
+		return
+	}
+	newCRS, _, proof, err := AddContribution(ceremony.IntermediateCRS)
+	if err != nil {
+		log.Error().Err(err).Msg("Failed to add CRS contribution")
+		return
+	}
+	log.Info().Str("contributor", p.nodeID).
+		Int("step", ceremony.CurrentStep).
+		Str("crs_hash", fmt.Sprintf("%x", sha256.Sum256(bytes.Join(newCRS, nil)))).
+		Msg("CRS contribution added")
+	msg := &ConsensusMessage{
+		Type:      CRSCeremony,
+		NodeID:    p.nodeID,
+		Timestamp: time.Now(),
+		CRSCeremony: &CRSCeremonyMessage{
+			EpochNumber:     ceremony.EpochNumber,
+			Step:            ceremony.CurrentStep,
+			IntermediateCRS: newCRS,
+			ContributorID:   p.nodeID,
+			Signature:       nil, // TODO: Add signature
+			Proof:           proof,
+		},
+	}
+	// Broadcast and update local state
+	if err := p.broadcast(msg); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast CRS ceremony message")
+		return
+	}
+	// If this was the last contribution, log the final CRS
+	if ceremony.CurrentStep == len(ceremony.Participants)-1 {
+		log.Info().Str("final_crs_hash", fmt.Sprintf("%x", sha256.Sum256(bytes.Join(newCRS, nil)))).
+			Msg("Final CRS generated for epoch")
+	}
 }

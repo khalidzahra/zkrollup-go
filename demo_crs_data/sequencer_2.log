@@ -1,0 +1,1349 @@
+2025/04/17 18:27:36 Failed to parse RPC port, using default port: strconv.Atoi: parsing "": invalid syntax
+{"level":"info","port":9102,"time":"2025-04-17T18:27:36-05:00","message":"Creating new P2P node"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:36-05:00","message":"Connected to bootstrap peer"}
+{"level":"info","time":"2025-04-17T18:27:36-05:00","message":"Registered protocol handlers"}
+{"level":"info","id":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:36-05:00","message":"Node started"}
+{"level":"info","addr":"/ip4/127.0.0.1/tcp/9102/p2p/12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:36-05:00","message":"Node address"}
+{"level":"info","addr":"/ip4/192.168.100.148/tcp/9102/p2p/12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:36-05:00","message":"Node address"}
+[90m18:27:36[0m [32mINF[0m [1mcompiling circuit[0m
+[90m18:27:36[0m [32mINF[0m [1mparsed circuit inputs[0m [36mnbPublic=[0m6 [36mnbSecret=[0m4
+[90m18:27:36[0m [32mINF[0m [1mbuilding constraint builder[0m [36mnbConstraints=[0m10506
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:37-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:37-05:00","message":"Connected to peer"}
+{"level":"info","protocols":[],"peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:37-05:00","message":"Peer supports protocols"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:38-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:38-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:39-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:39-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:40-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:40-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:41-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:41-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:42-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:42-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:43-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:43-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:44-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:44-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:45-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:45-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:46-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:46-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:47-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:47-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:48-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:48-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:49-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:49-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:50-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:50-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:51-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:51-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:52-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:52-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:53-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:53-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:54-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:54-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:55-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:55-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:56-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:56-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:56-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:57-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:57-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:58-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:58-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:27:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:59-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:27:59-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:27:59-05:00","message":"Received consensus stream with default handler"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:00-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:00-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:00-05:00","message":"Received consensus stream with default handler"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:01-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:01-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:01-05:00","message":"Received consensus stream with default handler"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:02-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:02-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:02-05:00","message":"Received consensus stream with default handler"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:03-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:03-05:00","message":"Already connected to peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:03-05:00","message":"Received consensus stream with default handler"}
+Setting up handlers - OnTransaction: true, OnBatch: true, OnConsensus: true
+Setting up protocol handlers with non-nil handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Setting up protocol handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Transaction protocol handler registered for /zkrollup/tx/1.0.0
+Batch protocol handler registered for /zkrollup/batch/1.0.0
+Consensus protocol handler registered for /zkrollup/consensus/1.0.0
+{"level":"info","time":"2025-04-17T18:28:03-05:00","message":"L1 integration disabled"}
+Setting up handlers - OnTransaction: true, OnBatch: true, OnConsensus: true
+Setting up protocol handlers with non-nil handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Setting up protocol handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Transaction protocol handler registered for /zkrollup/tx/1.0.0
+Batch protocol handler registered for /zkrollup/batch/1.0.0
+Consensus protocol handler registered for /zkrollup/consensus/1.0.0
+PBFT consensus started with handlers - OnTransaction: true, OnBatch: true, OnConsensus: true
+Setting up handlers - OnTransaction: true, OnBatch: true, OnConsensus: true
+Setting up protocol handlers with non-nil handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Setting up protocol handlers for node 12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN
+Transaction protocol handler registered for /zkrollup/tx/1.0.0
+Batch protocol handler registered for /zkrollup/batch/1.0.0
+Consensus protocol handler registered for /zkrollup/consensus/1.0.0
+Sequencer re-registered protocol handlers after consensus start
+2025/04/17 18:28:03 ZK-Rollup node started with RPC server on port 8081
+{"level":"info","port":8081,"time":"2025-04-17T18:28:03-05:00","message":"Starting RPC server"}
+{"level":"error","error":"listen tcp :8081: bind: address already in use","time":"2025-04-17T18:28:03-05:00","message":"RPC server error"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:04-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:04-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:04-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:04-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:04-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:05-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:05-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 455 bytes
+Calling consensus handler
+{"level":"info","data_size":455,"time":"2025-04-17T18:28:05-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:05-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:05-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:06-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:06-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:06-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:06-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:06-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:07-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:07-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:07-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:07-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:07-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:08-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:08-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 455 bytes
+Calling consensus handler
+{"level":"info","data_size":455,"time":"2025-04-17T18:28:08-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:08-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:08-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"info","peer_count":3,"time":"2025-04-17T18:28:08-05:00","message":"Updated consensus peer count"}
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:09-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:09-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:09-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:09-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:09-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:10-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:10-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:10-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:10-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:10-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:11-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:11-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:11-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:11-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:11-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:12-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:12-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:12-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:12-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:12-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:13-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:13-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:13-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:13-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:13-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:14-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:14-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:14-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:14-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:14-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:15-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:15-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:15-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:15-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:15-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:16-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:16-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:16-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:16-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:16-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:17-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:17-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:17-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:17-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:17-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:18-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:18-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:18-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:18-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:18-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:19-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:19-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:19-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:19-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:19-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:20-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:20-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:20-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:20-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:20-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:21-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:21-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:21-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:21-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:21-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:22-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:22-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:22-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:22-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:22-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:23-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:23-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:23-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:23-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:23-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:24-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:24-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:24-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:24-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:24-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:25-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:25-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:25-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:25-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:25-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:26-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:26-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:26-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:26-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:26-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:27-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:27-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:27-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:27-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:27-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:28-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:28-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:28-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:28-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:28-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:29-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:29-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:29-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:29-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:29-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:30-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:30-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:30-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:30-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:30-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:31-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:31-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:31-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:31-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:31-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:32-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:32-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:32-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:32-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:32-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:33-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:33-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:33-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:33-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:33-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:34-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:34-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:34-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:34-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:34-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:35-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:35-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:35-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:35-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:35-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:36-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:36-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:36-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:36-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:36-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:37-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:37-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:37-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:37-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:37-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:38-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:38-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:38-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:38-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:38-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:39-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:39-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:39-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:39-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:39-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:40-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:40-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:40-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:40-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:40-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:41-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:41-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:41-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:41-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:41-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:42-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:42-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:42-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:42-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:42-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:42-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:43-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:43-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:43-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:43-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:43-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:43-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:44-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:44-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:44-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:44-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:44-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:44-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:45-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:45-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:45-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:45-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:45-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:45-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:46-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:46-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:46-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:46-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:46-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:46-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:47-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:47-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:47-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:47-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:47-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:47-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:48-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:48-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:48-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:48-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:48-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:48-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:49-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:49-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:49-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:49-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:49-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:49-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:50-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:50-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:50-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:50-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:50-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:50-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:51-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:51-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:51-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:51-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:51-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:51-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:52-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:52-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:52-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:52-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:52-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:52-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:53-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:53-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:53-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:53-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:53-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:53-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:54-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:54-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:54-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:28:54-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:54-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:54-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:55-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:55-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:55-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:55-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:55-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:55-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:55-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:55-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:56-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:56-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:56-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:56-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:56-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:56-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:56-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:56-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:57-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:57-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:57-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:57-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:57-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:57-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:58-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:58-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:58-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:58-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:58-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:58-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:28:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:28:59-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:59-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:28:59-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:28:59-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:28:59-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:28:59-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:00-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:00-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:00-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:00-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:00-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:00-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:01-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:01-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:01-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:01-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:01-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:01-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:02-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:02-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:02-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:02-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:02-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:02-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:03-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:03-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:03-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:03-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:03-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:03-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:04-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:04-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:04-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:04-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:04-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:04-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:05-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:05-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:05-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:05-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:05-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:05-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:06-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:06-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:06-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:06-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:06-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:06-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:07-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:07-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:07-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:07-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:07-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:07-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:08-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:08-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:08-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:08-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:08-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:08-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:09-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:09-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:09-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:09-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:09-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:09-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:10-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:10-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:10-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:10-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:10-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:10-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:11-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:11-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:11-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:11-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:11-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:11-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:12-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:12-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:12-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:12-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:12-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:12-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:13-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:13-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:13-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:13-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:13-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:13-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:14-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:14-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:14-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:14-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:14-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:14-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:15-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:15-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:15-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 455 bytes
+Calling consensus handler
+{"level":"info","data_size":455,"time":"2025-04-17T18:29:15-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:15-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:15-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:16-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:16-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:16-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:16-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:16-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:16-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:17-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:17-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:17-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:17-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:17-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:17-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:18-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:18-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:18-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:18-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:18-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:18-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:19-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:19-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:19-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:19-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:19-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:19-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:20-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:20-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:20-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:20-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:20-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:20-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:21-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:21-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:21-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:21-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:21-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:21-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:22-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:22-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:22-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:22-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:22-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:22-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:23-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:23-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:23-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:23-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:23-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:23-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:24-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:24-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:24-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:24-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:24-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:24-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:25-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:25-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:25-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:25-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:25-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:25-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:26-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:26-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:26-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:26-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:26-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:26-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:27-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:27-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:27-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:27-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:27-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:27-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:28-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:28-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:28-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:28-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:28-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:28-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:29-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:29-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:29-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:29-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:29-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:29-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:30-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:30-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:30-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:30-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:30-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:30-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:31-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:31-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:31-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:31-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:31-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:31-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:32-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:32-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:32-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:32-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:32-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:32-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:33-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:33-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:33-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:33-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:33-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:33-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:34-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:34-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:34-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:34-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:34-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:34-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:35-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:35-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:35-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:35-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:35-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:35-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:36-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:36-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:36-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:36-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:36-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:36-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:37-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:37-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:37-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 457 bytes
+Calling consensus handler
+{"level":"info","data_size":457,"time":"2025-04-17T18:29:37-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:37-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:37-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:38-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:38-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:38-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 456 bytes
+Calling consensus handler
+{"level":"info","data_size":456,"time":"2025-04-17T18:29:38-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:38-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:38-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:39-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:39-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:39-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 458 bytes
+Calling consensus handler
+{"level":"info","data_size":458,"time":"2025-04-17T18:29:39-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:39-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:39-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:40-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:40-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:40-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 458 bytes
+Calling consensus handler
+{"level":"info","data_size":458,"time":"2025-04-17T18:29:40-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:40-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:40-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"debug","peer":"12D3KooWBVhgjSUULtzzDBB8ZSBtEitJHKqaFJmkPRNThHejz8fN","time":"2025-04-17T18:29:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:41-05:00","message":"Already connected to peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:41-05:00","message":"Discovered peer"}
+{"level":"debug","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:41-05:00","message":"Already connected to peer"}
+Received consensus stream from 12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T
+Successfully decoded consensus message of size 458 bytes
+Calling consensus handler
+{"level":"info","data_size":458,"time":"2025-04-17T18:29:41-05:00","message":"Received consensus message"}
+{"level":"info","type":"CRSEpochProposal","from":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","batch_hash":"","time":"2025-04-17T18:29:41-05:00","message":"Processing consensus message"}
+{"level":"warn","type":"CRSEpochProposal","batch_hash":"","time":"2025-04-17T18:29:41-05:00","message":"Received consensus message before pre-prepare, storing for later"}
+Consensus message handled successfully
+{"level":"info","time":"2025-04-17T18:29:42-05:00","message":"Stopping RPC server"}
+{"level":"info","peer":"12D3KooWBwJtqJUSVtHPDoBrFiiRapLETSacVTqtxFomfQViGD1z","time":"2025-04-17T18:29:42-05:00","message":"Disconnected from peer"}
+{"level":"info","peer":"12D3KooWEN8uDNuX3VZeMw4nbmRLrnefp2Qn1nZKbRcbzmCSXN8T","time":"2025-04-17T18:29:42-05:00","message":"Disconnected from peer"}

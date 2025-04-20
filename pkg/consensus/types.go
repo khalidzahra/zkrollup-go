@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"sync"
 	"time"
 
 	"zkrollup/pkg/state"
@@ -18,6 +19,8 @@ const (
 	Prepare
 	Commit
 	ViewChange
+	CRSEpochProposal
+	CRSCeremony
 )
 
 func (m MessageType) String() string {
@@ -30,21 +33,30 @@ func (m MessageType) String() string {
 		return "Commit"
 	case ViewChange:
 		return "ViewChange"
+	case CRSEpochProposal:
+		return "CRSEpochProposal"
+	case CRSCeremony:
+		return "CRSCeremony"
 	default:
 		return "Unknown"
 	}
 }
 
 // ConsensusMessage represents a message in the PBFT consensus protocol
+// Added CRSEpoch for CRS proposals
+// Only one of Batch or CRSEpoch should be set per message
+// (Batch for transaction batches, CRSEpoch for CRS epoch proposals)
 type ConsensusMessage struct {
-	Type      MessageType  `json:"type"`
-	View      int64        `json:"view"`       // Current view number
-	Sequence  int64        `json:"sequence"`   // Sequence number for this consensus round
-	BatchHash string       `json:"batch_hash"` // Hash of the batch being proposed
-	NodeID    string       `json:"node_id"`    // ID of the node sending this message
-	Timestamp time.Time    `json:"timestamp"`
-	Signature []byte       `json:"signature"`       // Signature of the message
-	Batch     *state.Batch `json:"batch,omitempty"` // Only included in PrePrepare
+	Type             MessageType  `json:"type"`
+	View             int64        `json:"view"`       // Current view number
+	Sequence         int64        `json:"sequence"`   // Sequence number for this consensus round
+	BatchHash        string       `json:"batch_hash"` // Hash of the batch being proposed
+	NodeID           string       `json:"node_id"`    // ID of the node sending this message
+	Timestamp        time.Time    `json:"timestamp"`
+	Signature        []byte       `json:"signature"`       // Signature of the message
+	Batch            *state.Batch `json:"batch,omitempty"` // Only included in PrePrepare
+	CRSEpoch         *CRSEpoch    `json:"crs_epoch,omitempty"`
+	CRSCeremony      *CRSCeremonyMessage `json:"crs_ceremony_message,omitempty"`
 }
 
 // Hash returns the SHA256 hash of the message's contents
@@ -178,4 +190,49 @@ func HasQuorum(count int, totalNodes int) bool {
 	// Standard PBFT quorum calculation for larger networks
 	f := (totalNodes - 1) / 3
 	return count >= 2*f+1
+}
+
+// CRSEpoch tracks the state of a CRS ceremony
+type CRSEpoch struct {
+	Number       int64         `json:"number"`
+	StartTime    time.Time     `json:"start_time"`
+	Duration     time.Duration `json:"duration"`
+	Participants []string      `json:"participants"`
+}
+
+// CRSState is the global CRS epoch state
+var CRSState struct {
+	CurrentEpoch CRSEpoch
+	EpochLock    sync.RWMutex
+}
+
+// SetCRSEpoch sets the current CRS epoch (thread-safe)
+func SetCRSEpoch(epoch CRSEpoch) {
+	CRSState.EpochLock.Lock()
+	defer CRSState.EpochLock.Unlock()
+	CRSState.CurrentEpoch = epoch
+}
+
+// GetCRSEpoch returns the current CRS epoch (thread-safe)
+func GetCRSEpoch() CRSEpoch {
+	CRSState.EpochLock.RLock()
+	defer CRSState.EpochLock.RUnlock()
+	return CRSState.CurrentEpoch
+}
+
+// SelectCRSParticipants deterministically selects N participants from a list of sequencer IDs using a randomness seed
+func SelectCRSParticipants(sequencers []string, n int, seed []byte) []string {
+	if n >= len(sequencers) {
+		return append([]string{}, sequencers...) // all
+	}
+	// Deterministic shuffle using seed
+	shuffled := append([]string{}, sequencers...)
+	for i := len(shuffled) - 1; i > 0; i-- {
+		h := sha256.New()
+		h.Write(seed)
+		h.Write([]byte(shuffled[i]))
+		idx := int(h.Sum(nil)[0]) % (i + 1)
+		shuffled[i], shuffled[idx] = shuffled[idx], shuffled[i]
+	}
+	return shuffled[:n]
 }
