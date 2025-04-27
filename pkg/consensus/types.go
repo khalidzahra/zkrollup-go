@@ -175,7 +175,6 @@ func HasQuorum(count int, totalNodes int) bool {
 		return count >= 2 // Only require 2 nodes for our test environment
 	}
 
-	// Standard PBFT quorum calculation for larger networks
 	f := (totalNodes - 1) / 3
 	return count >= 2*f+1
 }

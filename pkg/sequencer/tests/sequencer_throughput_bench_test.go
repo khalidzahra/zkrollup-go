@@ -51,7 +51,7 @@ func generateTransactions(n int, senderCount int) []state.Transaction {
 }
 
 func TestSequencerThroughput(t *testing.T) {
-	transactionCounts := []int{10000, 20000, 30000, 50000, 100000}
+	transactionCounts := []int{20000, 40000, 80000, 100000, 150000, 200000}
 	results := make([]struct {
 		Transactions int
 		Duration     float64 // seconds

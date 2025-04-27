@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"time"
-
 	"zkrollup/pkg/l1"
 	"zkrollup/pkg/sequencer/crsutils"
 

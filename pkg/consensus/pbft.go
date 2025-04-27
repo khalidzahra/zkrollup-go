@@ -47,14 +47,12 @@ func NewPBFT(node *p2p.Node, nodeID string, isLeader bool) *PBFT {
 
 // Start starts the consensus process
 func (p *PBFT) Start() {
-	// Get existing handlers to preserve them
 	existingHandlers := p.node.GetProtocolHandlers()
 
-	// Create new handlers with our consensus handler but preserving existing transaction and batch handlers
 	newHandlers := &p2p.ProtocolHandlers{
-		OnTransaction: existingHandlers.OnTransaction, // Preserve existing transaction handler
-		OnBatch:       existingHandlers.OnBatch,       // Preserve existing batch handler
-		OnConsensus:   p.HandleMessage,                // Set our consensus handler
+		OnTransaction: existingHandlers.OnTransaction,
+		OnBatch:       existingHandlers.OnBatch,
+		OnConsensus:   p.HandleMessage,
 	}
 
 	// Set up protocol handlers with the combined handlers
@@ -77,13 +75,6 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 	}
 
 	log.Info().Msg("Leader proposing new batch for consensus")
-
-	for i := range batch.Transactions {
-		// Handle zero values properly
-		if batch.Transactions[i].Amount.Sign() == 0 {
-			log.Debug().Msg("Handling zero amount specially for consistent hash computation")
-		}
-	}
 
 	// Create consensus state for this batch
 	state := NewConsensusState(p.view, p.sequence, batch)
@@ -140,13 +131,6 @@ func (p *PBFT) ProposeBatch(batch *state.Batch) error {
 		// Continue even if there's an error, as the pre-prepare was successful
 	}
 
-	// In standalone mode, we also need to update the commit count
-	if p.totalNodes <= 1 {
-		log.Info().Str("batch_hash", state.BatchHash).Msg("Standalone mode: Updating commit count")
-		// No need to create and broadcast a commit message, just update the state
-		state.CommitCount[p.nodeID] = true
-	}
-
 	p.sequence++
 	return nil
 }
@@ -164,15 +148,6 @@ func (p *PBFT) HandleMessage(data []byte) error {
 	var msg ConsensusMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
 		return fmt.Errorf("failed to unmarshal consensus message: %v", err)
-	}
-
-	if msg.Batch != nil {
-		for i := range msg.Batch.Transactions {
-			// Special handling for zero values
-			if msg.Batch.Transactions[i].Amount != nil && msg.Batch.Transactions[i].Amount.Sign() == 0 {
-				log.Debug().Msg("Ensuring proper zero value handling in consensus message")
-			}
-		}
 	}
 
 	log.Info().

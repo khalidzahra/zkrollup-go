@@ -113,7 +113,6 @@ func NewNode(ctx context.Context, port int, bootstrapPeers []string) (*Node, err
 	}
 
 	// Register default protocol handlers to ensure basic protocol negotiation works
-	// These will be overridden if actual handlers are provided via SetupProtocols
 	node.registerDefaultProtocolHandlers()
 
 	// Set up peer discovery
@@ -281,12 +280,6 @@ func (n *Node) registerDefaultProtocolHandlers() {
 				log.Error().Err(err).Msg("Error unmarshaling transaction")
 				s.Reset()
 				return
-			}
-
-			// Special handling for zero values to ensure consistent hash computation
-			if tx.Amount != nil && tx.Amount.Sign() == 0 {
-				log.Info().Msg("Transaction contains zero amount, ensuring proper formatting for consistent hash computation")
-				// This is critical for the ZK-Rollup implementation
 			}
 
 			// Call the transaction handler

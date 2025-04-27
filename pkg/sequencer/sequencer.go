@@ -37,10 +37,6 @@ type Sequencer struct {
 	batchInProgress bool
 	batchMu         sync.RWMutex
 
-	// Consensus channels
-	proposalCh  chan state.Batch
-	consensusCh chan state.Batch
-
 	ctx    context.Context
 	cancel context.CancelFunc
 
@@ -86,8 +82,6 @@ func NewSequencer(config *core.Config, port int, bootstrapPeers []string, isLead
 		config:       config,
 		state:        state.NewState(),
 		txPool:       make([]state.Transaction, 0),
-		proposalCh:   make(chan state.Batch),
-		consensusCh:  make(chan state.Batch),
 		ctx:          ctx,
 		cancel:       cancel,
 		prover:       prover,

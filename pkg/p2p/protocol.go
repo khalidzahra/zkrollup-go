@@ -50,27 +50,17 @@ func (n *Node) SetupProtocols(handlers *ProtocolHandlers) {
 		// Debug the handlers being set
 		fmt.Printf("Setting up handlers - OnTransaction: %v, OnBatch: %v, OnConsensus: %v\n",
 			handlers.OnTransaction != nil, handlers.OnBatch != nil, handlers.OnConsensus != nil)
-		
+
 		n.handlersLock.Lock()
 		n.handlers = handlers
 		n.handlersLock.Unlock()
-		
-		// Log that we're setting up handlers
+
 		fmt.Printf("Setting up protocol handlers with non-nil handlers for node %s\n", n.Host.ID().String())
 	}
-	
-	// Log which protocols are being set up using structured logging
 	fmt.Printf("Setting up protocol handlers for node %s\n", n.Host.ID().String())
 
-	// Register the protocol handlers
-	// This is the ONLY place where we should register protocol handlers
-	// to ensure consistent protocol negotiation
-	
-	// Transaction protocol handler
-	// IMPORTANT: We're removing any existing handler first to avoid conflicts
 	n.Host.RemoveStreamHandler(TransactionProtocolID)
-	
-	// Now register the new handler
+
 	n.Host.SetStreamHandler(TransactionProtocolID, func(s network.Stream) {
 		fmt.Printf("Received transaction stream from %s\n", s.Conn().RemotePeer().String())
 		defer s.Close()
@@ -94,54 +84,41 @@ func (n *Node) SetupProtocols(handlers *ProtocolHandlers) {
 			fmt.Printf("Error unmarshaling transaction: %v\n", err)
 			return
 		}
-		
-		// Special handling for zero values to ensure consistent hash computation
-		if tx.Amount != nil && tx.Amount.Sign() == 0 {
-			fmt.Printf("Transaction contains zero amount, ensuring proper formatting for consistent hash computation\n")
-			// When converting a big.Int with value 0 to bytes, it produces an empty byte array
-			// We need to use a single byte with value 0 instead for consistent hash computation
-		}
 
 		fmt.Printf("Successfully decoded transaction from %s to %s\n",
 			fmt.Sprintf("%x", tx.From), fmt.Sprintf("%x", tx.To))
 
-		// Ensure consistent nonce format between keygen, circuit, and transaction processing
-		// The nonce must be converted to a string representation when used in the circuit
-		// This is critical for the ZK-Rollup implementation to ensure consistent message hash computation
 		nonceStr := fmt.Sprintf("%d", tx.Nonce)
 		fmt.Printf("Using nonce string format '%s' for consistent hash computation\n", nonceStr)
-		
+
 		// Check if we have a transaction handler registered
 		n.handlersLock.RLock()
 		handlers := n.handlers
 		n.handlersLock.RUnlock()
-		
+
 		// Debug the handlers
-		fmt.Printf("Transaction handler check - handlers: %v, OnTransaction: %v\n", 
+		fmt.Printf("Transaction handler check - handlers: %v, OnTransaction: %v\n",
 			handlers != nil, handlers != nil && handlers.OnTransaction != nil)
-		
+
 		if handlers == nil || handlers.OnTransaction == nil {
 			fmt.Printf("No transaction handler registered in node handlers for node %s\n", n.Host.ID().String())
 			return
 		}
-		
+
 		// Call the transaction handler
 		fmt.Printf("Calling transaction handler\n")
 		if err := handlers.OnTransaction(&tx); err != nil {
 			fmt.Printf("Error handling transaction: %v\n", err)
 			return
 		}
-		
+
 		fmt.Printf("Transaction handled successfully\n")
 	})
 
 	fmt.Printf("Transaction protocol handler registered for %s\n", TransactionProtocolID)
 
 	// Batch protocol handler
-	// IMPORTANT: We're removing any existing handler first to avoid conflicts
 	n.Host.RemoveStreamHandler(BatchProtocolID)
-	
-	// Now register the new handler
 	n.Host.SetStreamHandler(BatchProtocolID, func(s network.Stream) {
 		fmt.Printf("Received batch stream from %s\n", s.Conn().RemotePeer().String())
 		defer s.Close()
@@ -172,29 +149,25 @@ func (n *Node) SetupProtocols(handlers *ProtocolHandlers) {
 		n.handlersLock.RLock()
 		handlers := n.handlers
 		n.handlersLock.RUnlock()
-		
+
 		if handlers == nil || handlers.OnBatch == nil {
 			fmt.Printf("No batch handler registered in node handlers\n")
 			return
 		}
-		
+
 		// Call the batch handler
 		fmt.Printf("Calling batch handler\n")
 		if err := handlers.OnBatch(&batch); err != nil {
 			fmt.Printf("Error handling batch: %v\n", err)
 			return
 		}
-		
+
 		fmt.Printf("Batch handled successfully\n")
 	})
 
 	fmt.Printf("Batch protocol handler registered for %s\n", BatchProtocolID)
 
-	// Consensus protocol handler
-	// IMPORTANT: We're removing any existing handler first to avoid conflicts
 	n.Host.RemoveStreamHandler(ConsensusProtocolID)
-	
-	// Now register the new handler
 	n.Host.SetStreamHandler(ConsensusProtocolID, func(s network.Stream) {
 		fmt.Printf("Received consensus stream from %s\n", s.Conn().RemotePeer().String())
 		defer s.Close()
@@ -219,19 +192,19 @@ func (n *Node) SetupProtocols(handlers *ProtocolHandlers) {
 		n.handlersLock.RLock()
 		handlers := n.handlers
 		n.handlersLock.RUnlock()
-		
+
 		if handlers == nil || handlers.OnConsensus == nil {
 			fmt.Printf("No consensus handler registered in node handlers\n")
 			return
 		}
-		
+
 		// Call the consensus handler
 		fmt.Printf("Calling consensus handler\n")
 		if err := handlers.OnConsensus(msg.Payload); err != nil {
 			fmt.Printf("Error handling consensus message: %v\n", err)
 			return
 		}
-		
+
 		fmt.Printf("Consensus message handled successfully\n")
 	})
 
@@ -240,18 +213,6 @@ func (n *Node) SetupProtocols(handlers *ProtocolHandlers) {
 
 // BroadcastTransaction broadcasts a transaction to all connected peers
 func (n *Node) BroadcastTransaction(ctx context.Context, tx *state.Transaction) error {
-	// Special handling for zero values to ensure consistent hash computation
-	if tx.Amount.Sign() == 0 {
-		fmt.Printf("Transaction contains zero amount, ensuring proper formatting for broadcast\n")
-		// When converting a big.Int with value 0 to bytes, it produces an empty byte array
-		// We need to use a single byte with value 0 instead for consistent hash computation
-	}
-	
-	// Ensure consistent nonce format between keygen, circuit, and transaction processing
-	// The nonce must be converted to a string representation when used in the circuit
-	nonceStr := fmt.Sprintf("%d", tx.Nonce)
-	fmt.Printf("Using nonce string format '%s' for consistent hash computation in broadcast\n", nonceStr)
-
 	payload, err := json.Marshal(tx)
 	if err != nil {
 		return fmt.Errorf("failed to marshal transaction: %v", err)
@@ -304,7 +265,6 @@ func (n *Node) broadcast(ctx context.Context, protocolID protocol.ID, msg Messag
 	peers := n.GetPeers()
 	if len(peers) == 0 {
 		fmt.Printf("No peers available for broadcasting protocol %s, continuing in standalone mode\n", protocolID)
-		// In standalone mode, we don't need to broadcast, so just return success
 		return nil
 	}
 
@@ -338,7 +298,6 @@ func (n *Node) broadcast(ctx context.Context, protocolID protocol.ID, msg Messag
 				fmt.Printf("Protocol negotiation issue detected, retrying after delay...\n")
 				time.Sleep(time.Millisecond * 500)
 			} else {
-				// Other error, no need to retry
 				break
 			}
 		}
@@ -350,17 +309,6 @@ func (n *Node) broadcast(ctx context.Context, protocolID protocol.ID, msg Messag
 
 		// Set deadline for writing to stream
 		stream.SetWriteDeadline(time.Now().Add(time.Second * 10)) // Increased timeout
-
-		// Special handling for zero values to ensure consistent hash computation
-		// This is critical for the ZK-Rollup implementation
-		if msg.Type == MessageTransaction {
-			var tx state.Transaction
-			if err := json.Unmarshal(msg.Payload, &tx); err == nil {
-				if tx.Amount != nil && tx.Amount.Sign() == 0 {
-					fmt.Printf("Handling zero amount specially for consistent hash computation\n")
-				}
-			}
-		}
 
 		if err := json.NewEncoder(stream).Encode(msg); err != nil {
 			fmt.Printf("Failed to send message to peer %s: %v\n", peer.String(), err)

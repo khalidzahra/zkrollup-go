@@ -106,7 +106,7 @@ func (c *Client) SubmitBatch(ctx context.Context, batch *state.Batch, proof []by
 	batchNumber := big.NewInt(int64(batch.BatchNumber))
 	stateRoot := common.BytesToHash(batch.StateRoot[:])
 	txHashes := make([][32]byte, len(batch.Transactions))
-	
+
 	for i, tx := range batch.Transactions {
 		txHashes[i] = tx.Hash()
 	}
