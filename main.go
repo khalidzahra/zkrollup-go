@@ -24,11 +24,7 @@ func main() {
 	}
 
 	// Get RPC port from environment variable or use default
-	rpcPort, err := strconv.Atoi(os.Getenv("RPC_PORT"))
-	if err != nil {
-		log.Printf("Failed to parse RPC port, using default port: %v", err)
-		rpcPort = 8081 // Use port 8081 for the RPC server to match test script expectations
-	}
+	rpcPort := port + 1000
 
 	// Get bootstrap peers from environment variable
 	var bootstrapPeers []string

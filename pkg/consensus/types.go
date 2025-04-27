@@ -18,6 +18,7 @@ const (
 	Prepare
 	Commit
 	ViewChange
+	LeaderRotation
 )
 
 func (m MessageType) String() string {
@@ -30,6 +31,8 @@ func (m MessageType) String() string {
 		return "Commit"
 	case ViewChange:
 		return "ViewChange"
+	case LeaderRotation:
+		return "LeaderRotation"
 	default:
 		return "Unknown"
 	}
@@ -37,14 +40,15 @@ func (m MessageType) String() string {
 
 // ConsensusMessage represents a message in the PBFT consensus protocol
 type ConsensusMessage struct {
-	Type      MessageType  `json:"type"`
-	View      int64        `json:"view"`       // Current view number
-	Sequence  int64        `json:"sequence"`   // Sequence number for this consensus round
-	BatchHash string       `json:"batch_hash"` // Hash of the batch being proposed
-	NodeID    string       `json:"node_id"`    // ID of the node sending this message
-	Timestamp time.Time    `json:"timestamp"`
-	Signature []byte       `json:"signature"`       // Signature of the message
-	Batch     *state.Batch `json:"batch,omitempty"` // Only included in PrePrepare
+	Type       MessageType  `json:"type"`
+	View       int64        `json:"view"`       // Current view number
+	Sequence   int64        `json:"sequence"`   // Sequence number for this consensus round
+	BatchHash  string       `json:"batch_hash"` // Hash of the batch being proposed
+	NodeID     string       `json:"node_id"`    // ID of the node sending this message
+	Timestamp  time.Time    `json:"timestamp"`
+	Signature  []byte       `json:"signature"`             // Signature of the message
+	Batch      *state.Batch `json:"batch,omitempty"`       // Only included in PrePrepare
+	NextLeader string       `json:"next_leader,omitempty"` // ID of the next leader (only in Commit messages)
 }
 
 // Hash returns the SHA256 hash of the message's contents
@@ -110,6 +114,7 @@ type ConsensusState struct {
 	Decided       bool
 	SentCommit    bool // Tracks if we've already sent a commit message
 	PrePrepareMsg *ConsensusMessage
+	NextLeader    string // ID of the next leader
 }
 
 // NewConsensusState creates a new consensus state
@@ -171,10 +176,6 @@ func NewConsensusState(view, sequence int64, batch *state.Batch) *ConsensusState
 // HasQuorum returns true if the number of messages received is greater than 2f+1
 // where f is the maximum number of faulty nodes the system can tolerate
 func HasQuorum(count int, totalNodes int) bool {
-	if totalNodes <= 4 {
-		return count >= 2 // Only require 2 nodes for our test environment
-	}
-
 	f := (totalNodes - 1) / 3
 	return count >= 2*f+1
 }

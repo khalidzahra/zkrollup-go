@@ -44,7 +44,7 @@ func main() {
 	bytecodeStr := strings.TrimSpace(string(bytecode))
 
 	// Set RPC URL
-	rpcURL := "http://localhost:8081"
+	rpcURL := "http://localhost:9000"
 
 	// Get nonce
 	nonce, err := getNonce(rpcURL, address.Hex())

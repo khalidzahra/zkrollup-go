@@ -35,7 +35,7 @@ func DefaultConfig() *Config {
 		EthereumRPC:         "http://localhost:8545",
 		ChainID:             1337, // Local network
 		SequencerPort:       9000,
-		BatchSize:           100,
+		BatchSize:           1,
 		ProofGeneration:     true,
 		StateDBPath:         "./statedb",
 		L1Enabled:           false, // Disabled by default

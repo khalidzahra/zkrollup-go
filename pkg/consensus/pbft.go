@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"sort"
 	"sync"
 	"time"
 
@@ -26,6 +27,8 @@ type PBFT struct {
 	decidedBatch chan *state.Batch
 	ctx          context.Context
 	cancel       context.CancelFunc
+	nodeIDs      []string     // List of all node IDs in the network
+	nodeIDsLock  sync.RWMutex // Lock for nodeIDs
 }
 
 // NewPBFT creates a new PBFT consensus instance
@@ -42,6 +45,7 @@ func NewPBFT(node *p2p.Node, nodeID string, isLeader bool) *PBFT {
 		decidedBatch: make(chan *state.Batch),
 		ctx:          ctx,
 		cancel:       cancel,
+		nodeIDs:      []string{nodeID}, // Initialize with self
 	}
 }
 
@@ -156,6 +160,26 @@ func (p *PBFT) HandleMessage(data []byte) error {
 		Str("batch_hash", msg.BatchHash).
 		Msg("Processing consensus message")
 
+	// Add the node ID to our list if it's not already there
+	p.addNodeID(msg.NodeID)
+
+	// Handle leader rotation messages separately as they don't depend on batch state
+	if msg.Type == LeaderRotation {
+		log.Info().Str("from", msg.NodeID).Str("next_leader", msg.NextLeader).Msg("Received leader rotation message")
+
+		// Update our leader status based on the leader's decision
+		p.isLeader = (msg.NextLeader == p.nodeID)
+		p.view = msg.View + 1 // Set view to match the leader's next view
+
+		if p.isLeader {
+			log.Info().Str("node_id", p.nodeID).Int64("view", p.view).Msg("This node is now the leader based on leader rotation message")
+		} else {
+			log.Info().Str("node_id", p.nodeID).Str("new_leader", msg.NextLeader).Int64("view", p.view).Msg("Leadership transferred based on leader rotation message")
+		}
+
+		return nil
+	}
+
 	// Verify message basics
 	if msg.View != p.view {
 		return fmt.Errorf("message from wrong view")
@@ -174,7 +198,6 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			state.PrePrepareMsg = &msg
 			p.states[msg.BatchHash] = state
 		} else {
-			// For other message types, wait for PrePrepare
 			log.Warn().
 				Str("type", msg.Type.String()).
 				Str("batch_hash", msg.BatchHash).
@@ -237,14 +260,6 @@ func (p *PBFT) HandleMessage(data []byte) error {
 
 			log.Info().Str("node_id", p.nodeID).Int("commit_count", len(state.CommitCount)).Msg("Adding our own commit message to the count")
 
-			// Check if we have enough commits after adding our own
-			if HasQuorum(len(state.CommitCount), p.totalNodes) && !state.Decided && p.isLeader {
-				log.Info().Msg("Leader has enough commit messages after adding its own, finalizing batch")
-				state.Decided = true
-				p.decidedBatch <- state.Batch
-				delete(p.states, msg.BatchHash) // Clean up state
-			}
-
 			if err := p.broadcast(commit); err != nil {
 				log.Error().Err(err).Msg("Failed to broadcast commit message")
 			}
@@ -263,6 +278,29 @@ func (p *PBFT) HandleMessage(data []byte) error {
 		if HasQuorum(len(state.CommitCount), p.totalNodes) && !state.Decided {
 			log.Info().Int("commit_count", len(state.CommitCount)).Int("total_nodes", p.totalNodes).Msg("Received enough commit messages, finalizing batch")
 			state.Decided = true
+
+			// If we're the leader, initiate leader rotation
+			if p.isLeader {
+				// Determine the next leader
+				nextLeader := p.rotateLeader()
+				log.Info().Str("next_leader", nextLeader).Msg("Broadcasting leader rotation message")
+
+				// Send a dedicated leader rotation message
+				leaderMsg := &ConsensusMessage{
+					Type:       LeaderRotation,
+					View:       p.view - 1, // Use the previous view since we just incremented it
+					Sequence:   msg.Sequence,
+					BatchHash:  msg.BatchHash,
+					NodeID:     p.nodeID,
+					Timestamp:  time.Now(),
+					NextLeader: nextLeader,
+				}
+
+				if err := p.broadcast(leaderMsg); err != nil {
+					log.Error().Err(err).Msg("Failed to broadcast leader rotation message")
+				}
+			}
+
 			p.decidedBatch <- state.Batch
 			delete(p.states, msg.BatchHash) // Clean up state
 		}
@@ -303,4 +341,61 @@ func (p *PBFT) GetDecidedBatchChan() <-chan *state.Batch {
 // UpdateTotalNodes updates the total number of nodes in the network
 func (p *PBFT) UpdateTotalNodes(count int) {
 	p.totalNodes = count
+}
+
+// addNodeID adds a node ID to the list if it's not already there
+func (p *PBFT) addNodeID(nodeID string) {
+	p.nodeIDsLock.Lock()
+	defer p.nodeIDsLock.Unlock()
+
+	// Check if the node ID is already in the list
+	for _, id := range p.nodeIDs {
+		if id == nodeID {
+			return
+		}
+	}
+
+	// Add the node ID to the list
+	p.nodeIDs = append(p.nodeIDs, nodeID)
+	log.Info().Str("node_id", nodeID).Int("total_nodes", len(p.nodeIDs)).Msg("Added new node ID to the list")
+}
+
+// rotateLeader rotates the leader role to the next node in the list
+func (p *PBFT) rotateLeader() string {
+	p.nodeIDsLock.Lock()
+	defer p.nodeIDsLock.Unlock()
+
+	log.Debug().Int("total_nodes", len(p.nodeIDs)).Msg("Rotating leader")
+
+	sort.Strings(p.nodeIDs)
+	if len(p.nodeIDs) <= 1 {
+		p.isLeader = true
+		return p.nodeID
+	}
+	p.view++
+
+	// Deterministically select the leader based on the view number
+	leaderIndex := int(p.view) % len(p.nodeIDs)
+	nextLeaderID := p.nodeIDs[leaderIndex]
+
+	log.Debug().Int64("view", p.view).Str("next_leader", nextLeaderID).Msg("Rotating leader")
+
+	// Update the leader status
+	wasLeader := p.isLeader
+	p.isLeader = (nextLeaderID == p.nodeID)
+
+	if wasLeader != p.isLeader {
+		if p.isLeader {
+			log.Info().Str("node_id", p.nodeID).Int64("view", p.view).Msg("This node is now the leader")
+		} else {
+			log.Info().Str("node_id", p.nodeID).Str("new_leader", nextLeaderID).Int64("view", p.view).Msg("Leadership transferred to another node")
+		}
+	}
+
+	return nextLeaderID
+}
+
+// IsLeader returns whether this node is currently the leader
+func (p *PBFT) IsLeader() bool {
+	return p.isLeader
 }

@@ -257,43 +257,58 @@ func (s *Sequencer) processBatches() {
 }
 
 func (s *Sequencer) tryCreateBatch() {
-	s.poolMu.Lock()
-	s.batchMu.Lock()
-	defer s.poolMu.Unlock()
-	defer s.batchMu.Unlock()
+	s.poolMu.RLock()
+	txCount := len(s.txPool)
+	s.poolMu.RUnlock()
 
-	if s.batchInProgress || len(s.txPool) == 0 {
+	// Check if we have enough transactions and are not already processing a batch
+	if txCount < int(s.config.BatchSize/2) || s.batchInProgress {
 		return
 	}
 
-	// Create new batch
-	txCount := min(len(s.txPool), int(s.config.BatchSize))
+	// Check if we are the leader
+	if !s.isLeader {
+		log.Debug().Msg("Not the leader, skipping batch creation")
+		return
+	}
+
+	s.batchMu.Lock()
+	defer s.batchMu.Unlock()
+
+	// Double-check that we're not already processing a batch
+	if s.batchInProgress {
+		return
+	}
+
+	// Mark that we're starting to process a batch
+	s.batchInProgress = true
+
+	// Create a new batch with transactions from the pool
+	s.poolMu.Lock()
+	batchSize := min(txCount, int(s.config.BatchSize))
+	batchTxs := make([]state.Transaction, batchSize)
+	copy(batchTxs, s.txPool[:batchSize])
+	s.txPool = s.txPool[batchSize:]
+	s.poolMu.Unlock()
+
+	// Create the batch
 	batch := &state.Batch{
-		Transactions: make([]state.Transaction, txCount),
+		Transactions: batchTxs,
 		BatchNumber:  s.state.GetBatchNumber() + 1,
 		Timestamp:    uint64(time.Now().Unix()),
 	}
 
-	copy(batch.Transactions, s.txPool[:txCount])
-	s.txPool = s.txPool[txCount:]
-
-	s.batchInProgress = true
+	// Store the current batch
 	s.currentBatch = batch
 
-	// If we're the leader, propose the batch for consensus
-	if s.isLeader {
-		log.Info().Msg("Proposing batch for consensus")
-		if err := s.consensus.ProposeBatch(batch); err != nil {
-			log.Error().Err(err).Msg("Failed to propose batch for consensus")
-			// Reset batch state on error
-			s.batchInProgress = false
-			s.currentBatch = nil
-		}
-	} else {
-		// Non-leaders just broadcast the batch to the network
-		if err := s.node.BroadcastBatch(s.ctx, batch); err != nil {
-			log.Error().Err(err).Msg("Failed to broadcast batch")
-		}
+	// Propose the batch for consensus
+	if err := s.consensus.ProposeBatch(batch); err != nil {
+		log.Error().Err(err).Msg("Failed to propose batch for consensus")
+		// Return transactions to the pool
+		s.poolMu.Lock()
+		s.txPool = append(batchTxs, s.txPool...)
+		s.poolMu.Unlock()
+		s.batchInProgress = false
 	}
 }
 
@@ -310,6 +325,14 @@ func (s *Sequencer) participateConsensus() {
 			log.Info().Msg("Received decided batch from consensus")
 			if err := s.processFinalizedBatch(*batch); err != nil {
 				log.Error().Err(err).Msg("Failed to process finalized batch")
+			}
+
+			// Update leader status from consensus module
+			s.isLeader = s.consensus.IsLeader()
+			if s.isLeader {
+				log.Info().Msg("This node is now the leader and will propose the next batch")
+			} else {
+				log.Info().Msg("This node is not the leader for the next batch")
 			}
 		}
 	}
@@ -396,93 +419,60 @@ func (s *Sequencer) BroadcastConsensusMessage(msg interface{}) error {
 }
 
 func (s *Sequencer) processFinalizedBatch(batch state.Batch) error {
-	s.batchMu.Lock()
-	defer s.batchMu.Unlock()
+	log.Info().Int("tx_count", len(batch.Transactions)).Msg("Processing finalized batch")
 
-	// Get initial state root for proof generation
-	initialStateRoot := s.state.GetStateRoot()
-
-	// Apply transactions and generate proofs
+	// Process each transaction in the batch
 	for _, tx := range batch.Transactions {
-		// Get sender account
+		var err error
+
+		// Get the sender account
 		sender, err := s.state.GetAccount(tx.From)
 		if err != nil {
-			log.Error().Err(err).Str("address", formatAddress(tx.From)).Msg("Failed to get sender account")
-			continue
-		}
-
-		// Verify nonce
-		if tx.Nonce != sender.Nonce {
-			log.Error().Uint64("expected", sender.Nonce).Uint64("got", tx.Nonce).Msg("Invalid nonce")
+			log.Error().Err(err).Str("from", common.BytesToAddress(tx.From[:]).Hex()).Msg("Failed to get sender account")
 			continue
 		}
 
 		// Process transaction based on type
 		switch tx.Type {
 		case state.TxTypeTransfer:
-			// Process a simple transfer transaction
-			err := s.processTransferTransaction(tx, sender)
-			if err != nil {
-				log.Error().Err(err).Msg("Failed to process transfer transaction")
-				continue
-			}
-
+			err = s.processTransferTransaction(tx, sender)
 		case state.TxTypeContractDeploy:
-			// Process a contract deployment transaction
-			err := s.processContractDeployment(tx, sender)
-			if err != nil {
-				log.Error().Err(err).Msg("Failed to process contract deployment")
-				continue
-			}
-
+			err = s.processContractDeployment(tx, sender)
 		case state.TxTypeContractCall:
-			// Process a contract call transaction
-			err := s.processContractCall(tx, sender)
-			if err != nil {
-				log.Error().Err(err).Msg("Failed to process contract call")
-				continue
-			}
-
+			err = s.processContractCall(tx, sender)
 		default:
-			log.Error().Uint8("type", uint8(tx.Type)).Msg("Unknown transaction type")
+			err = fmt.Errorf("unknown transaction type: %d", tx.Type)
+		}
+
+		if err != nil {
+			log.Error().Err(err).Str("tx_hash", common.BytesToHash(tx.HashToBytes()).Hex()).Msg("Failed to process transaction")
 			continue
 		}
 	}
 
-	// Get final state root and generate state transition proof
-	finalRoot := s.state.GetStateRoot()
-
-	// Store batch proof
-	batch.StateRoot = finalRoot
-	// Store previous root in proof for verification
-	proofData := append(initialStateRoot[:], finalRoot[:]...)
-	batch.Proof = proofData
-
-	// Add the finalized batch to the state's batch history
+	// Update batch number in state
 	s.state.AddBatch(&batch)
-	log.Info().Int("tx_count", len(batch.Transactions)).Str("state_root", fmt.Sprintf("%x", batch.StateRoot)).Msg("Added finalized batch to state")
 
-	// Broadcast the finalized batch to all peers
-	if err := s.node.BroadcastBatch(s.ctx, &batch); err != nil {
-		log.Error().Err(err).Msg("Failed to broadcast finalized batch")
-		// Continue processing even if broadcast fails
-	} else {
-		log.Info().Msg("Successfully broadcasted finalized batch to peers")
-	}
+	// Mark batch processing as complete
+	s.batchMu.Lock()
+	s.batchInProgress = false
+	s.currentBatch = nil
+	s.batchMu.Unlock()
 
 	// Submit batch to L1 if enabled
-	if s.l1Enabled && s.l1Client != nil && s.l1SubmitChan != nil {
-		// Send batch to L1 submission channel
+	if s.l1Enabled && s.l1SubmitChan != nil {
 		select {
 		case s.l1SubmitChan <- batch:
-			log.Info().Uint64("batch_number", batch.BatchNumber).Msg("Queued batch for L1 submission")
+			log.Info().Msg("Submitted batch to L1 submission queue")
 		default:
-			log.Warn().Uint64("batch_number", batch.BatchNumber).Msg("L1 submission queue full, skipping batch")
+			log.Warn().Msg("L1 submission queue is full, skipping this batch")
 		}
 	}
 
-	s.batchInProgress = false
-	s.currentBatch = nil
+	// Add a small delay after processing a batch to prevent rapid leader rotation
+	// This gives the system time to stabilize between batches
+	time.Sleep(time.Millisecond * 500)
+
 	return nil
 }
 
