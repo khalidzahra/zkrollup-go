@@ -1,7 +1,7 @@
 package crypto
 
 import (
-	tedwards "github.com/consensys/gnark-crypto/ecc/twistededwards"
+	ed "github.com/consensys/gnark-crypto/ecc/twistededwards"
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/std/algebra/native/twistededwards"
 	"github.com/consensys/gnark/std/hash/mimc"
@@ -19,48 +19,25 @@ type TransactionCircuit struct {
 	// Private inputs
 	Signature eddsa.Signature   `gnark:",secret"`
 	Balance   frontend.Variable `gnark:",secret"`
-
-	// Internal state
-	api frontend.API
 }
 
 // Define implements the circuit logic for transaction verification
 func (c *TransactionCircuit) Define(api frontend.API) error {
-	c.api = api
-
-	// 1. Verify signature
-	msg := computeMessageHash(api, c.FromPubKey, c.ToPubKey, c.Amount, c.Nonce)
-	hashFunc, err := mimc.NewMiMC(api)
-	if err != nil {
-		return err
-	}
-
-	// Create Edwards curve for signature verification
-	curve, err := twistededwards.NewEdCurve(api, tedwards.BN254)
-	if err != nil {
-		return err
-	}
-
-	// Verify signature using EdDSA
-	if err := eddsa.Verify(curve, c.Signature, msg, c.FromPubKey, &hashFunc); err != nil {
-		return err
-	}
-
-	// 2. Verify sender has sufficient balance
 	api.AssertIsLessOrEqual(c.Amount, c.Balance)
 
-	return nil
-}
+	curve, err := twistededwards.NewEdCurve(api, ed.BN254)
+	if err != nil {
+		return err
+	}
 
-func computeMessageHash(api frontend.API, from, to eddsa.PublicKey, amount, nonce frontend.Variable) frontend.Variable {
-	hash, _ := mimc.NewMiMC(api)
+	mimc, err := mimc.NewMiMC(api)
+	if err != nil {
+		return err
+	}
 
-	hash.Write(from.A.X)
-	hash.Write(from.A.Y)
-	hash.Write(to.A.X)
-	hash.Write(to.A.Y)
-	hash.Write(amount)
-	hash.Write(nonce)
+	mimc.Write(c.ToPubKey.A.X, c.ToPubKey.A.Y, c.Amount, c.Balance, c.Nonce)
+	msgHash := mimc.Sum()
 
-	return hash.Sum()
+	mimc.Reset()
+	return eddsa.Verify(curve, c.Signature, msgHash, c.FromPubKey, &mimc)
 }

@@ -4,144 +4,139 @@ import (
 	"crypto/rand"
 	"fmt"
 	"math/big"
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/consensys/gnark-crypto/ecc"
-	"github.com/consensys/gnark-crypto/ecc/bn254/fr"
-	"github.com/consensys/gnark-crypto/ecc/bn254/twistededwards/eddsa"
+	ed "github.com/consensys/gnark-crypto/ecc/twistededwards"
 	"github.com/consensys/gnark-crypto/hash"
+	"github.com/consensys/gnark-crypto/signature"
+	"github.com/consensys/gnark-crypto/signature/eddsa"
 	"github.com/consensys/gnark/backend"
-	"github.com/consensys/gnark/std/algebra/native/twistededwards"
 	gnarkEddsa "github.com/consensys/gnark/std/signature/eddsa"
 	"github.com/consensys/gnark/test"
 )
 
-func TestTransactionCircuit(t *testing.T) {
-	// Create test witness
-	witness, err := createTestWitness()
-	if err != nil {
-		t.Fatal(err)
-	}
+func TestCircuitConstraints(t *testing.T) {
+	// Create a simple circuit
+	circuit := &TransactionCircuit{}
 
-	// Create empty circuit
-	var circuit TransactionCircuit
-
-	// Run test
+	// Compile the circuit
 	assert := test.NewAssert(t)
-	assert.ProverSucceeded(&circuit, witness, test.WithCurves(ecc.BN254), test.WithBackends(backend.GROTH16))
+	assert.CheckCircuit(circuit, test.WithCurves(ecc.BN254), test.WithBackends(backend.GROTH16))
 }
 
-func createTestWitness() (*TransactionCircuit, error) {
-	// Generate key pairs
-	senderPrivKey, err := eddsa.GenerateKey(rand.Reader)
+func TestProverSetup(t *testing.T) {
+	// Create a new prover
+	prover, err := NewProver()
 	if err != nil {
-		return nil, err
-	}
-	senderPubKey := &senderPrivKey.PublicKey
-
-	// Convert public key to frontend format
-	fromPubKey, err := publicKeyToFrontend(senderPubKey)
-	if err != nil {
-		return nil, err
+		t.Fatalf("failed to create prover: %v", err)
 	}
 
-	// Transaction parameters
+	// Check that the prover was created with valid keys
+	if prover.provingKey == nil {
+		t.Fatal("proving key is nil")
+	}
+
+	if prover.verifyingKey == nil {
+		t.Fatal("verifying key is nil")
+	}
+}
+
+// TestEndToEndProofGeneration tests the complete proof generation and verification process
+func TestEndToEndProofGeneration(t *testing.T) {
+	hFunc := hash.MIMC_BN254.New()
+
+	senderPubKey, senderSigner, err := GenerateKeyPair()
+	if err != nil {
+		t.Fatalf("failed to generate sender key pair: %v", err)
+	}
+	receiverPubKey, _, err := GenerateKeyPair()
+	if err != nil {
+		t.Fatalf("failed to generate receiver key pair: %v", err)
+	}
+
+	gSenderPubKey := gnarkEddsa.PublicKey{}
+	gReceiverPubKey := gnarkEddsa.PublicKey{}
+
+	gSenderPubKey.Assign(ed.BN254, senderPubKey.Bytes()[:32])
+	gReceiverPubKey.Assign(ed.BN254, receiverPubKey.Bytes()[:32])
+
 	amount := big.NewInt(100)
-	nonce := big.NewInt(1)
-	balance := big.NewInt(1000)
+	balance := big.NewInt(200)
+	nonce := big.NewInt(200)
 
-	// Prepare message to sign
-	msg := prepareMessage(senderPubKey, senderPubKey, amount, nonce)
+	hFunc.Write(getBytes(fmt.Sprint(gReceiverPubKey.A.X)))
+	hFunc.Write(getBytes(fmt.Sprint(gReceiverPubKey.A.Y)))
+	hFunc.Write(amount.Bytes())
+	hFunc.Write(balance.Bytes())
+	hFunc.Write(nonce.Bytes())
 
-	// Sign with MIMC hash
-	hFunc := hash.MIMC_BN254.New()
-	sigBytes, err := senderPrivKey.Sign(msg, hFunc)
+	nonceHash := hFunc.Sum(nil)
+
+	signature, err := senderSigner.Sign(nonceHash, hFunc)
 	if err != nil {
-		fmt.Println("Error signing message")
-		fmt.Println(err)
-		return nil, err
+		t.Fatalf("failed to sign nonce: %v", err)
 	}
 
-	// Decode signature
-	sig := new(eddsa.Signature)
-	if _, err = sig.SetBytes(sigBytes); err != nil {
-		return nil, err
-	}
+	gSig := gnarkEddsa.Signature{}
 
-	// Convert signature to frontend format
-	gnarkSig, err := signatureToFrontend(sig)
+	gSig.Assign(ed.BN254, signature)
+
+	prover, err := NewProver()
 	if err != nil {
-		return nil, err
+		t.Fatalf("failed to create prover: %v", err)
+	}
+	witness, err := prover.CreateWitness(
+		gSenderPubKey,
+		gReceiverPubKey,
+		amount,
+		nonce,
+		gSig,
+		balance,
+	)
+	if err != nil {
+		t.Fatalf("failed to create witness: %v", err)
+	}
+	proof, pubWitness, err := prover.GenerateProof(witness)
+	if err != nil {
+		t.Fatalf("failed to generate proof: %v", err)
 	}
 
-	return &TransactionCircuit{
-		FromPubKey: *fromPubKey,
-		ToPubKey:   *fromPubKey,
-		Amount:     amount.String(),
-		Nonce:      nonce.String(),
-		Signature:  *gnarkSig,
-		Balance:    balance.String(),
-	}, nil
+	valid, err := prover.VerifyProof(proof, pubWitness)
+	if err != nil {
+		t.Fatalf("failed to verify proof: %v", err)
+	}
+
+	if !valid {
+		t.Fatal("proof verification failed")
+	} else {
+		t.Log("proof verification succeeded")
+	}
 }
 
-func publicKeyToFrontend(pubKey *eddsa.PublicKey) (*gnarkEddsa.PublicKey, error) {
-	var x, y fr.Element
-	x.Set(&pubKey.A.X)
-	y.Set(&pubKey.A.Y)
+func GenerateKeyPair() (signature.PublicKey, signature.Signer, error) {
+	privateKey, err := eddsa.New(ed.BN254, rand.Reader)
+	if err != nil {
+		fmt.Println("failed to create a key pair. error:", err)
+		return nil, nil, err
+	}
+	publicKey := privateKey.Public()
 
-	return &gnarkEddsa.PublicKey{
-		A: twistededwards.Point{
-			X: x.String(),
-			Y: y.String(),
-		},
-	}, nil
+	return publicKey, privateKey, nil
 }
 
-func signatureToFrontend(sig *eddsa.Signature) (*gnarkEddsa.Signature, error) {
-	var rx, ry, s fr.Element
-
-	// Convert R point (X,Y)
-	rx.Set(&sig.R.X)
-	ry.Set(&sig.R.Y)
-
-	// Convert S scalar
-	sBigInt := new(big.Int).SetBytes(sig.S[:])
-	s.SetBigInt(sBigInt)
-
-	return &gnarkEddsa.Signature{
-		R: twistededwards.Point{
-			X: rx.String(),
-			Y: ry.String(),
-		},
-		S: s.String(),
-	}, nil
-}
-
-func prepareMessage(fromPubKey, toPubKey *eddsa.PublicKey, amount, nonce *big.Int) []byte {
-	// Use MIMC hash to match circuit's message computation
-	hFunc := hash.MIMC_BN254.New()
-
-	// Write public key coordinates
-	fromX := fromPubKey.A.X.Bytes()
-	fromY := fromPubKey.A.Y.Bytes()
-	toX := toPubKey.A.X.Bytes()
-	toY := toPubKey.A.Y.Bytes()
-
-	hFunc.Write(fromX[:])
-	hFunc.Write(fromY[:])
-	hFunc.Write(toX[:])
-	hFunc.Write(toY[:])
-
-	// Convert amount and nonce to fr.Element
-	var amountFr, nonceFr fr.Element
-	amountFr.SetBigInt(amount)
-	nonceFr.SetBigInt(nonce)
-
-	// Write transaction details as fr.Element bytes
-	amountBytes := amountFr.Bytes()
-	nonceBytes := nonceFr.Bytes()
-	hFunc.Write(amountBytes[:])
-	hFunc.Write(nonceBytes[:])
-
-	return hFunc.Sum(nil)
+func getBytes(str string) []byte {
+	trimmed := strings.Trim(str, "[]")
+	parts := strings.Fields(trimmed) // Splits on whitespace
+	bytes := make([]byte, len(parts))
+	for i, p := range parts {
+		val, err := strconv.Atoi(p)
+		if err != nil {
+			panic(err)
+		}
+		bytes[i] = byte(val)
+	}
+	return bytes
 }
