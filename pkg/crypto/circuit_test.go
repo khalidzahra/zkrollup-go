@@ -35,11 +35,11 @@ func TestProverSetup(t *testing.T) {
 	}
 
 	// Check that the prover was created with valid keys
-	if prover.provingKey == nil {
+	if prover.ProvingKey == nil {
 		t.Fatal("proving key is nil")
 	}
 
-	if prover.verifyingKey == nil {
+	if prover.VerifyingKey == nil {
 		t.Fatal("verifying key is nil")
 	}
 }
@@ -99,7 +99,7 @@ func TestEndToEndProofGeneration(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create witness: %v", err)
 	}
-	proof, pubWitness, err := prover.GenerateProof(witness)
+	proof, pubWitness, err := prover.GenerateProofSerialized(witness)
 	if err != nil {
 		t.Fatalf("failed to generate proof: %v", err)
 	}
