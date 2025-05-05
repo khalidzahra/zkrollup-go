@@ -4,12 +4,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"path/filepath"
 	"sort"
 	"sync"
 	"time"
 
 	"github.com/rs/zerolog/log"
 
+	"zkrollup/pkg/l1"
 	"zkrollup/pkg/p2p"
 	"zkrollup/pkg/state"
 )
@@ -29,24 +32,40 @@ type PBFT struct {
 	cancel       context.CancelFunc
 	nodeIDs      []string     // List of all node IDs in the network
 	nodeIDsLock  sync.RWMutex // Lock for nodeIDs
+
+	// CRS Ceremony related fields
+	crsManager      *l1.CRSManager     // L1 CRS Manager client
+	ptauState       *PTauCeremonyState // Current Powers of Tau ceremony state
+	ptauStateLock   sync.RWMutex       // Lock for ptauState
+	crsCeremonyDir  string             // Directory to store CRS ceremony files
+	currentEpoch    int64              // Current epoch number
+	crsCeremonyDone chan bool          // Channel to signal when CRS ceremony is complete
 }
 
 // NewPBFT creates a new PBFT consensus instance
 func NewPBFT(node *p2p.Node, nodeID string, isLeader bool) *PBFT {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &PBFT{
-		node:         node,
-		nodeID:       nodeID,
-		view:         0,
-		sequence:     0,
-		states:       make(map[string]*ConsensusState),
-		isLeader:     isLeader,
-		totalNodes:   1, // Will be updated as nodes join
-		decidedBatch: make(chan *state.Batch),
-		ctx:          ctx,
-		cancel:       cancel,
-		nodeIDs:      []string{nodeID}, // Initialize with self
+		node:            node,
+		nodeID:          nodeID,
+		view:            0,
+		sequence:        0,
+		states:          make(map[string]*ConsensusState),
+		isLeader:        isLeader,
+		totalNodes:      1, // Will be updated as nodes join
+		decidedBatch:    make(chan *state.Batch),
+		ctx:             ctx,
+		cancel:          cancel,
+		nodeIDs:         []string{nodeID}, // Initialize with self
+		crsCeremonyDir:  filepath.Join(os.TempDir(), "zkrollup", "crs"),
+		currentEpoch:    0,
+		crsCeremonyDone: make(chan bool),
 	}
+}
+
+// SetCRSManager sets the L1 CRS Manager client
+func (p *PBFT) SetCRSManager(crsManager *l1.CRSManager) {
+	p.crsManager = crsManager
 }
 
 // Start starts the consensus process
@@ -61,6 +80,11 @@ func (p *PBFT) Start() {
 
 	// Set up protocol handlers with the combined handlers
 	p.node.SetupProtocols(newHandlers)
+
+	// Create CRS ceremony directory if it doesn't exist
+	if err := os.MkdirAll(p.crsCeremonyDir, 0755); err != nil {
+		log.Error().Err(err).Str("dir", p.crsCeremonyDir).Msg("Failed to create CRS ceremony directory")
+	}
 
 	// Log the handlers we're using
 	fmt.Printf("PBFT consensus started with handlers - OnTransaction: %v, OnBatch: %v, OnConsensus: %v\n",
@@ -163,6 +187,16 @@ func (p *PBFT) HandleMessage(data []byte) error {
 	// Add the node ID to our list if it's not already there
 	p.addNodeID(msg.NodeID)
 
+	// Handle CRS ceremony messages
+	switch msg.Type {
+	case CRSCeremonyStart:
+		return p.handleCRSCeremonyStart(&msg)
+	case CRSContribution:
+		return p.handleCRSContribution(&msg)
+	case CRSCeremonyComplete:
+		return p.handleCRSCeremonyComplete(&msg)
+	}
+
 	// Handle leader rotation messages separately as they don't depend on batch state
 	if msg.Type == LeaderRotation {
 		log.Info().Str("from", msg.NodeID).Str("next_leader", msg.NextLeader).Msg("Received leader rotation message")
@@ -201,18 +235,21 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			log.Warn().
 				Str("type", msg.Type.String()).
 				Str("batch_hash", msg.BatchHash).
-				Msg("Received consensus message before pre-prepare, storing for later")
-			return nil
+				Msg("Received consensus message for unknown batch")
+			return fmt.Errorf("unknown batch hash: %s", msg.BatchHash)
 		}
 	}
 
 	// Process message based on type
 	switch msg.Type {
 	case PrePrepare:
-		// Only non-leader nodes should process pre-prepare messages
-		if p.isLeader {
-			return nil
+		// Validate the pre-prepare message
+		if state.Phase != PrePrepare {
+			return fmt.Errorf("received pre-prepare message in wrong phase")
 		}
+
+		// Store the pre-prepare message
+		state.PrePrepareMsg = &msg
 
 		// Send prepare message
 		prepare := &ConsensusMessage{
@@ -224,28 +261,31 @@ func (p *PBFT) HandleMessage(data []byte) error {
 			Timestamp: time.Now(),
 		}
 
-		log.Info().Str("batch_hash", msg.BatchHash).Msg("Broadcasting prepare message")
+		log.Info().Str("batch_hash", msg.BatchHash).Msg("Sending prepare message")
 
+		// Add our prepare message to the state
+		state.PrepareCount[p.nodeID] = true
+
+		// Broadcast the prepare message
 		if err := p.broadcast(prepare); err != nil {
 			log.Error().Err(err).Msg("Failed to broadcast prepare message")
+			return fmt.Errorf("failed to broadcast prepare: %v", err)
 		}
 
+		state.Phase = Prepare
+
 	case Prepare:
-		// Record prepare message
+		// Validate the prepare message
+		if state.Phase > Prepare {
+			return nil // Already moved past prepare phase
+		}
+
+		// Add the prepare message to the state
 		state.PrepareCount[msg.NodeID] = true
 
-		log.Info().
-			Int("prepare_count", len(state.PrepareCount)).
-			Int("total_nodes", p.totalNodes).
-			Msg("Received prepare message")
-
-		// If we have enough prepares, move to commit phase
-		if HasQuorum(len(state.PrepareCount), p.totalNodes) && !state.SentCommit {
-			log.Info().Msg("Received enough prepare messages, moving to commit phase")
-
-			// Mark that we've sent a commit message for this batch
-			state.SentCommit = true
-
+		// Check if we have enough prepare messages to move to commit phase
+		if len(state.PrepareCount) >= 2*(p.totalNodes/3)+1 && !state.SentCommit {
+			// Send commit message
 			commit := &ConsensusMessage{
 				Type:      Commit,
 				View:      p.view,
@@ -255,81 +295,361 @@ func (p *PBFT) HandleMessage(data []byte) error {
 				Timestamp: time.Now(),
 			}
 
-			// Add our own commit message to the count
+			log.Info().Str("batch_hash", msg.BatchHash).Msg("Sending commit message")
+
+			// Add our commit message to the state
 			state.CommitCount[p.nodeID] = true
+			state.SentCommit = true
 
-			log.Info().Str("node_id", p.nodeID).Int("commit_count", len(state.CommitCount)).Msg("Adding our own commit message to the count")
-
+			// Broadcast the commit message
 			if err := p.broadcast(commit); err != nil {
 				log.Error().Err(err).Msg("Failed to broadcast commit message")
+				return fmt.Errorf("failed to broadcast commit: %v", err)
 			}
+
+			state.Phase = Commit
 		}
 
 	case Commit:
-		// Record commit message
+		// Add the commit message to the state
 		state.CommitCount[msg.NodeID] = true
 
-		log.Info().
-			Int("commit_count", len(state.CommitCount)).
-			Int("total_nodes", p.totalNodes).
-			Msg("Received commit message")
-
-		// If we have enough commits, decide on the batch
-		if HasQuorum(len(state.CommitCount), p.totalNodes) && !state.Decided {
-			log.Info().Int("commit_count", len(state.CommitCount)).Int("total_nodes", p.totalNodes).Msg("Received enough commit messages, finalizing batch")
+		// Check if we have enough commit messages to decide
+		if len(state.CommitCount) >= 2*(p.totalNodes/3)+1 && !state.Decided {
+			log.Info().Str("batch_hash", msg.BatchHash).Msg("Batch decided")
 			state.Decided = true
 
-			// If we're the leader, initiate leader rotation
+			// If we're the leader, we should rotate leadership
 			if p.isLeader {
-				// Determine the next leader
 				nextLeader := p.rotateLeader()
-				log.Info().Str("next_leader", nextLeader).Msg("Broadcasting leader rotation message")
+				log.Info().Str("next_leader", nextLeader).Msg("Rotating leadership")
 
-				// Send a dedicated leader rotation message
-				leaderMsg := &ConsensusMessage{
+				// Send leader rotation message
+				rotation := &ConsensusMessage{
 					Type:       LeaderRotation,
-					View:       p.view - 1, // Use the previous view since we just incremented it
-					Sequence:   msg.Sequence,
-					BatchHash:  msg.BatchHash,
+					View:       p.view,
+					Sequence:   p.sequence,
+					BatchHash:  "",
 					NodeID:     p.nodeID,
 					Timestamp:  time.Now(),
 					NextLeader: nextLeader,
 				}
 
-				if err := p.broadcast(leaderMsg); err != nil {
+				if err := p.broadcast(rotation); err != nil {
 					log.Error().Err(err).Msg("Failed to broadcast leader rotation message")
 				}
+
+				// Update our leader status
+				p.isLeader = (nextLeader == p.nodeID)
+				p.view++
 			}
 
+			// Send the batch to the decided channel
 			p.decidedBatch <- state.Batch
-			delete(p.states, msg.BatchHash) // Clean up state
 		}
 	}
 
 	return nil
 }
 
+// StartCRSCeremony initiates a new CRS ceremony
+func (p *PBFT) StartCRSCeremony() error {
+	if !p.isLeader {
+		return fmt.Errorf("only leader can start CRS ceremony")
+	}
+
+	log.Info().Msg("Leader initiating CRS ceremony")
+
+	// Increment epoch number
+	p.currentEpoch++
+
+	// Get a sorted copy of the node IDs to ensure consistent ordering
+	p.nodeIDsLock.RLock()
+	sortedNodeIDs := make([]string, len(p.nodeIDs))
+	copy(sortedNodeIDs, p.nodeIDs)
+	p.nodeIDsLock.RUnlock()
+	sort.Strings(sortedNodeIDs)
+
+	log.Info().Strs("participants", sortedNodeIDs).Msg("Ordered participants for CRS ceremony")
+
+	// Create a new PTau ceremony state
+	ptauState, err := NewPTauCeremonyState(p.currentEpoch, sortedNodeIDs, 12, p.crsCeremonyDir)
+	if err != nil {
+		return fmt.Errorf("failed to create PTau ceremony state: %v", err)
+	}
+
+	p.ptauStateLock.Lock()
+	p.ptauState = ptauState
+	p.ptauStateLock.Unlock()
+
+	// Create and broadcast CRS ceremony start message
+	msg := &ConsensusMessage{
+		Type:         CRSCeremonyStart,
+		View:         p.view,
+		Sequence:     p.sequence,
+		NodeID:       p.nodeID,
+		Timestamp:    time.Now(),
+		EpochNumber:  p.currentEpoch,
+		Participants: sortedNodeIDs, // Include the ordered list of participants
+	}
+
+	log.Info().Int64("epoch", p.currentEpoch).Msg("Broadcasting CRS ceremony start message")
+
+	// Broadcast the message
+	if err := p.broadcast(msg); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast CRS ceremony start message")
+		return fmt.Errorf("failed to broadcast CRS ceremony start: %v", err)
+	}
+
+	// If this node is the first participant, contribute to the ceremony
+	if p.ptauState.CheckTurn(p.nodeID) {
+		return p.contributeToCRSCeremony()
+	}
+
+	return nil
+}
+
+// contributeToCRSCeremony contributes to the current CRS ceremony
+func (p *PBFT) contributeToCRSCeremony() error {
+	p.ptauStateLock.RLock()
+	if p.ptauState == nil {
+		p.ptauStateLock.RUnlock()
+		return fmt.Errorf("no active CRS ceremony")
+	}
+
+	if !p.ptauState.CheckTurn(p.nodeID) {
+		p.ptauStateLock.RUnlock()
+		return fmt.Errorf("not this node's turn to contribute")
+	}
+	p.ptauStateLock.RUnlock()
+
+	// Generate random entropy for contribution
+	entropy := fmt.Sprintf("%d-%s-%d", time.Now().UnixNano(), p.nodeID, p.currentEpoch)
+
+	p.ptauStateLock.Lock()
+	contributionMsg, err := p.ptauState.AddContribution(p.nodeID, entropy)
+	p.ptauStateLock.Unlock()
+
+	if err != nil {
+		return fmt.Errorf("failed to add contribution: %v", err)
+	}
+
+	// Create and broadcast CRS contribution message
+	msg := &ConsensusMessage{
+		Type:            CRSContribution,
+		View:            p.view,
+		Sequence:        p.sequence,
+		NodeID:          p.nodeID,
+		Timestamp:       time.Now(),
+		EpochNumber:     p.currentEpoch,
+		ContributionMsg: contributionMsg,
+		PTauFileData:    contributionMsg.PTauFileData,
+	}
+
+	log.Info().Int64("epoch", p.currentEpoch).Int("step", contributionMsg.Step).Msg("Broadcasting CRS contribution message")
+
+	// Broadcast the message
+	if err := p.broadcast(msg); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast CRS contribution message")
+		return fmt.Errorf("failed to broadcast CRS contribution: %v", err)
+	}
+
+	return nil
+}
+
+// handleCRSCeremonyStart handles a CRS ceremony start message
+func (p *PBFT) handleCRSCeremonyStart(msg *ConsensusMessage) error {
+	log.Info().Int64("epoch", msg.EpochNumber).Strs("participants", msg.Participants).Msg("Received CRS ceremony start message")
+
+	// Ensure we have participants list
+	if len(msg.Participants) == 0 {
+		return fmt.Errorf("received CRS ceremony start message without participants list")
+	}
+
+	// Create a new PTau ceremony state using the participants list from the message
+	ptauState, err := NewPTauCeremonyState(msg.EpochNumber, msg.Participants, 12, p.crsCeremonyDir)
+	if err != nil {
+		return fmt.Errorf("failed to create PTau ceremony state: %v", err)
+	}
+
+	p.ptauStateLock.Lock()
+	p.ptauState = ptauState
+	p.currentEpoch = msg.EpochNumber
+	p.ptauStateLock.Unlock()
+
+	// If this node is the first participant, contribute to the ceremony
+	if p.ptauState.CheckTurn(p.nodeID) {
+		return p.contributeToCRSCeremony()
+	}
+
+	return nil
+}
+
+// handleCRSContribution handles a CRS contribution message
+func (p *PBFT) handleCRSContribution(msg *ConsensusMessage) error {
+	log.Info().Int64("epoch", msg.EpochNumber).Str("from", msg.NodeID).Msg("Received CRS contribution message")
+
+	// Check if we have an active CRS ceremony
+	p.ptauStateLock.RLock()
+	if p.ptauState == nil {
+		p.ptauStateLock.RUnlock()
+		return fmt.Errorf("no active CRS ceremony")
+	}
+	p.ptauStateLock.RUnlock()
+
+	// Verify the contribution
+	p.ptauStateLock.Lock()
+	if p.ptauState == nil || p.currentEpoch != msg.EpochNumber {
+		p.ptauStateLock.Unlock()
+		return fmt.Errorf("no matching CRS ceremony for epoch %d", msg.EpochNumber)
+	}
+
+	// Verify the contribution
+	if err := p.ptauState.VerifyContribution(msg.ContributionMsg); err != nil {
+		p.ptauStateLock.Unlock()
+		return fmt.Errorf("failed to verify contribution: %v", err)
+	}
+
+	// Save the contribution
+	tauFile, err := os.Create(p.ptauState.PTauPath)
+	if err != nil {
+		return fmt.Errorf("failed to create PTau file: %v", err)
+	}
+	if _, err := tauFile.Write(msg.PTauFileData); err != nil {
+		return fmt.Errorf("failed to write PTau file: %v", err)
+	}
+	tauFile.Close()
+	fmt.Printf("Saved PTau file to %s\n", p.ptauState.PTauPath)
+
+	// Update the ceremony state
+	p.ptauState.CurrentStep = msg.ContributionMsg.Step + 1
+
+	// Check if the ceremony is complete
+	isComplete := p.ptauState.CurrentStep >= len(p.ptauState.Participants)
+	if isComplete {
+		p.ptauState.Completed = true
+	}
+
+	// Check if it's this node's turn to contribute
+	isMyTurn := p.ptauState.CheckTurn(p.nodeID)
+	p.ptauStateLock.Unlock()
+
+	// If it's this node's turn, contribute to the ceremony
+	if isMyTurn {
+		p.contributeToCRSCeremony()
+	}
+
+	// If the ceremony is complete and this node is the leader, finalize it
+	p.ptauStateLock.RLock()
+	isComplete = p.ptauState.CurrentStep >= len(p.ptauState.Participants)
+	p.ptauStateLock.RUnlock()
+
+	log.Info().Msgf("isComplete: %t, isLeader: %t", isComplete, p.isLeader)
+	if isComplete && p.isLeader {
+		log.Info().Msgf("Finalizing CRS ceremony for epoch %d", p.currentEpoch)
+		return p.finalizeCRSCeremony()
+	}
+
+	return nil
+}
+
+// finalizeCRSCeremony finalizes the current CRS ceremony
+func (p *PBFT) finalizeCRSCeremony() error {
+	p.ptauStateLock.Lock()
+	if p.ptauState == nil {
+		p.ptauStateLock.Unlock()
+		return fmt.Errorf("no active CRS ceremony")
+	}
+
+	// Mark the ceremony as completed
+	p.ptauState.Completed = true
+
+	// Finalize the ceremony
+	finalPath, err := p.ptauState.FinalizeCeremony()
+	if err != nil {
+		p.ptauStateLock.Unlock()
+		return fmt.Errorf("failed to finalize ceremony: %v", err)
+	}
+	p.ptauStateLock.Unlock()
+
+	// Read the final PTau file
+	finalData, err := os.ReadFile(finalPath)
+	if err != nil {
+		return fmt.Errorf("failed to read final PTau file: %v", err)
+	}
+
+	// Create and broadcast CRS ceremony complete message
+	msg := &ConsensusMessage{
+		Type:         CRSCeremonyComplete,
+		View:         p.view,
+		Sequence:     p.sequence,
+		NodeID:       p.nodeID,
+		Timestamp:    time.Now(),
+		EpochNumber:  p.currentEpoch,
+		PTauFileData: finalData,
+	}
+
+	log.Info().Int64("epoch", p.currentEpoch).Msg("Broadcasting CRS ceremony complete message")
+
+	// Broadcast the message
+	if err := p.broadcast(msg); err != nil {
+		log.Error().Err(err).Msg("Failed to broadcast CRS ceremony complete message")
+		return fmt.Errorf("failed to broadcast CRS ceremony complete: %v", err)
+	}
+
+	// Signal that the CRS ceremony is complete
+	select {
+	case p.crsCeremonyDone <- true:
+	default:
+	}
+
+	return nil
+}
+
+// handleCRSCeremonyComplete handles a CRS ceremony complete message
+func (p *PBFT) handleCRSCeremonyComplete(msg *ConsensusMessage) error {
+	log.Info().Int64("epoch", msg.EpochNumber).Msg("Received CRS ceremony complete message")
+
+	// Save the final PTau file
+	finalPath := filepath.Join(p.crsCeremonyDir, fmt.Sprintf("pot_epoch%d_final.ptau", msg.EpochNumber))
+	if err := os.WriteFile(finalPath, msg.PTauFileData, 0644); err != nil {
+		return fmt.Errorf("failed to save final PTau file: %v", err)
+	}
+
+	p.ptauStateLock.Lock()
+	if p.ptauState != nil && p.currentEpoch == msg.EpochNumber {
+		p.ptauState.Completed = true
+		p.ptauState.PTauPath = finalPath
+	}
+	p.ptauStateLock.Unlock()
+
+	// Signal that the CRS ceremony is complete
+	select {
+	case p.crsCeremonyDone <- true:
+	default:
+	}
+
+	return nil
+}
+
+// GetCRSCeremonyDoneChan returns the channel that signals when a CRS ceremony is complete
+func (p *PBFT) GetCRSCeremonyDoneChan() <-chan bool {
+	return p.crsCeremonyDone
+}
+
 // broadcast sends a consensus message to all peers
 func (p *PBFT) broadcast(msg *ConsensusMessage) error {
-	log.Info().Msgf("Broadcasting consensus message: type=%s, from=%s, batch_hash=%s", msg.Type, msg.NodeID, msg.BatchHash)
-
-	hashStr := msg.Hash()
-	log.Debug().Str("message_hash", hashStr).Msg("Computed message hash for consensus")
-
+	// Marshal the message to JSON
 	data, err := json.Marshal(msg)
 	if err != nil {
-		log.Error().Err(err).Msg("Failed to marshal consensus message")
 		return fmt.Errorf("failed to marshal consensus message: %v", err)
 	}
 
-	log.Debug().Int("data_size", len(data)).Msg("Consensus message size")
-
+	// Broadcast to all peers
 	if err := p.node.BroadcastConsensus(p.ctx, data); err != nil {
-		log.Error().Err(err).Msg("Failed to broadcast consensus message")
-		return err
+		return fmt.Errorf("failed to broadcast consensus message: %v", err)
 	}
 
-	log.Info().Msg("Successfully broadcasted consensus message")
 	return nil
 }
 
@@ -357,42 +677,38 @@ func (p *PBFT) addNodeID(nodeID string) {
 
 	// Add the node ID to the list
 	p.nodeIDs = append(p.nodeIDs, nodeID)
-	log.Info().Str("node_id", nodeID).Int("total_nodes", len(p.nodeIDs)).Msg("Added new node ID to the list")
+	p.totalNodes = len(p.nodeIDs)
+
+	log.Info().Str("node_id", nodeID).Int("total_nodes", p.totalNodes).Msg("Added new node ID to list")
 }
 
 // rotateLeader rotates the leader role to the next node in the list
 func (p *PBFT) rotateLeader() string {
-	p.nodeIDsLock.Lock()
-	defer p.nodeIDsLock.Unlock()
+	p.nodeIDsLock.RLock()
+	defer p.nodeIDsLock.RUnlock()
 
-	log.Debug().Int("total_nodes", len(p.nodeIDs)).Msg("Rotating leader")
+	// Sort the node IDs to ensure consistent leader rotation
+	sortedNodeIDs := make([]string, len(p.nodeIDs))
+	copy(sortedNodeIDs, p.nodeIDs)
+	sort.Strings(sortedNodeIDs)
 
-	sort.Strings(p.nodeIDs)
-	if len(p.nodeIDs) <= 1 {
-		p.isLeader = true
-		return p.nodeID
-	}
-	p.view++
-
-	// Deterministically select the leader based on the view number
-	leaderIndex := int(p.view) % len(p.nodeIDs)
-	nextLeaderID := p.nodeIDs[leaderIndex]
-
-	log.Debug().Int64("view", p.view).Str("next_leader", nextLeaderID).Msg("Rotating leader")
-
-	// Update the leader status
-	wasLeader := p.isLeader
-	p.isLeader = (nextLeaderID == p.nodeID)
-
-	if wasLeader != p.isLeader {
-		if p.isLeader {
-			log.Info().Str("node_id", p.nodeID).Int64("view", p.view).Msg("This node is now the leader")
-		} else {
-			log.Info().Str("node_id", p.nodeID).Str("new_leader", nextLeaderID).Int64("view", p.view).Msg("Leadership transferred to another node")
+	// Find the current leader's position
+	currentLeaderPos := -1
+	for i, id := range sortedNodeIDs {
+		if id == p.nodeID {
+			currentLeaderPos = i
+			break
 		}
 	}
 
-	return nextLeaderID
+	// If we couldn't find the current leader, default to the first node
+	if currentLeaderPos == -1 {
+		return sortedNodeIDs[0]
+	}
+
+	// Rotate to the next node
+	nextLeaderPos := (currentLeaderPos + 1) % len(sortedNodeIDs)
+	return sortedNodeIDs[nextLeaderPos]
 }
 
 // IsLeader returns whether this node is currently the leader

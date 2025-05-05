@@ -19,6 +19,9 @@ const (
 	Commit
 	ViewChange
 	LeaderRotation
+	CRSCeremonyStart
+	CRSContribution
+	CRSCeremonyComplete
 )
 
 func (m MessageType) String() string {
@@ -33,6 +36,12 @@ func (m MessageType) String() string {
 		return "ViewChange"
 	case LeaderRotation:
 		return "LeaderRotation"
+	case CRSCeremonyStart:
+		return "CRSCeremonyStart"
+	case CRSContribution:
+		return "CRSContribution"
+	case CRSCeremonyComplete:
+		return "CRSCeremonyComplete"
 	default:
 		return "Unknown"
 	}
@@ -49,6 +58,12 @@ type ConsensusMessage struct {
 	Signature  []byte       `json:"signature"`             // Signature of the message
 	Batch      *state.Batch `json:"batch,omitempty"`       // Only included in PrePrepare
 	NextLeader string       `json:"next_leader,omitempty"` // ID of the next leader (only in Commit messages)
+	
+	// CRS Ceremony fields
+	EpochNumber     int64                   `json:"epoch_number,omitempty"`     // Epoch number for CRS ceremony
+	PTauFileData    []byte                  `json:"ptau_file_data,omitempty"`   // PTau file data for CRS ceremony
+	ContributionMsg *PTauContributionMessage `json:"contribution_msg,omitempty"` // CRS contribution message
+	Participants    []string                `json:"participants,omitempty"`     // Ordered list of participants for CRS ceremony
 }
 
 // Hash returns the SHA256 hash of the message's contents
